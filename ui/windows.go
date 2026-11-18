@@ -375,7 +375,6 @@ const (
 	prefsTabPreferences = iota
 	prefsTabAccounts
 	prefsTabStatus
-	prefsTabLogs
 	prefsTabAbout
 )
 

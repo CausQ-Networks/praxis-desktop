@@ -13,13 +13,20 @@ const sections: { name: string; icon: ReactNode }[] = [
   { name: "Preferences", icon: <GearIcon /> },
   { name: "Accounts", icon: <AccountsIcon /> },
   { name: "Status", icon: <StatusIcon /> },
-  { name: "Logs", icon: <LogsIcon /> },
   { name: "About", icon: <InfoIcon /> },
 ];
+const aboutTab = 3;
 
 /** Sidebar + detail layout, like the macOS app's NavigationSplitView. */
 export function PreferencesWindow() {
-  const [tab, setTab] = useState(0);
+  const [tab, setTabState] = useState(0);
+  // Logs is a page within About, opened from it like a pushed view on macOS.
+  const [showingLogs, setShowingLogs] = useState(false);
+  // Changing section, or reopening the window, goes back to the section's first page.
+  const setTab = (t: number) => {
+    setTabState(t);
+    setShowingLogs(false);
+  };
   const [settings, setSettings] = useState<Settings | null>(null);
   // Bumped each time the window is shown, so sections reset like a freshly opened window.
   const [openCount, setOpenCount] = useState(0);
@@ -77,8 +84,20 @@ export function PreferencesWindow() {
       </nav>
 
       <main className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-[44px] shrink-0 items-center justify-between pr-3 pl-5">
-          <span className="text-[15px] font-semibold">{sections[tab].name}</span>
+        <header className={cx("flex h-[44px] shrink-0 items-center justify-between pr-3", showingLogs ? "pl-2.5" : "pl-5")}>
+          <div className="flex min-w-0 items-center gap-1">
+            {showingLogs && (
+              <button
+                type="button"
+                aria-label="Back to About"
+                onClick={() => setShowingLogs(false)}
+                className="flex size-[28px] items-center justify-center rounded-[6px] text-mac-secondary hover:bg-mac-fill"
+              >
+                <BackIcon />
+              </button>
+            )}
+            <span className="text-[15px] font-semibold">{showingLogs ? "Logs" : sections[tab].name}</span>
+          </div>
           <div ref={setHeaderAccessory} className="flex items-center" />
         </header>
         {/* Sections stay mounted so the logs view keeps its scroll position and selection. */}
@@ -89,11 +108,11 @@ export function PreferencesWindow() {
         <Pane visible={tab === 2}>
           <StatusTab key={openCount} />
         </Pane>
-        <Pane visible={tab === 3}>
-          <LogsTab visible={tab === 3} />
+        <Pane visible={tab === aboutTab && !showingLogs}>
+          <AboutTab onShowLogs={() => setShowingLogs(true)} />
         </Pane>
-        <Pane visible={tab === 4}>
-          <AboutTab />
+        <Pane visible={tab === aboutTab && showingLogs}>
+          <LogsTab visible={tab === aboutTab && showingLogs} />
         </Pane>
       </main>
     </div>
@@ -139,13 +158,11 @@ function StatusIcon() {
   );
 }
 
-function LogsIcon() {
+/** `chevron.left`, the back button of a pushed page. */
+function BackIcon() {
   return (
-    <svg viewBox="0 0 20 20" className="size-[16px]" fill="currentColor">
-      <path
-        fillRule="evenodd"
-        d="M5 1.5h6.6L16 5.9V16.5A2 2 0 0 1 14 18.5H6a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2Zm1.5 8h7v1.3h-7V9.5Zm0 3h7v1.3h-7v-1.3Zm0-6h3.5v1.3H6.5V6.5Z"
-      />
+    <svg viewBox="0 0 10 16" className="h-[14px] w-[9px]" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M8 2 2 8l6 6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
