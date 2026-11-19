@@ -103,7 +103,7 @@ jobs:
       EXE: build/Praxis.exe
       WXS: praxis.wxs
       PRODUCT_NAME: Praxis
-      PRODUCT_URL: https://praxis.net
+      PRODUCT_URL: https://praxis.causq.com
       JSIGN_VERSION: "7.6"
       JSIGN_SHA256: 6cf58aa080e7ff82656f320cff8d4a3bff30408df8766806dcba3740dd839fa5
       WIX_VERSION: "5.0.2"
