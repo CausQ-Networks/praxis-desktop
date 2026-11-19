@@ -1,5 +1,7 @@
 # [Praxis](https://praxis.net) Client for Windows and Linux
 
+[![Discord](https://img.shields.io/discord/1572896060949659679?logo=discord&style=flat-square&label=Discord)](https://praxis.causq.com/discord/)
+
 This is the official Praxis client with GUI for Windows and Linux devices. 
 
 This client can be used with both:
