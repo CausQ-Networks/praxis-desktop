@@ -1,22 +1,22 @@
 .PHONY: build build-debug build-linux package-linux package-linux-tarball check-release-version install-linux uninstall-linux clean rsrc frontend bindings test help
 
 # Variables
-BINARY_NAME=Pangolin
-MANIFEST=pangolin.manifest
+BINARY_NAME=Praxis
+MANIFEST=praxis.manifest
 BUILD_DIR=build
 RSRC_SYSO=rsrc.syso
 FRONTEND_DIR=ui/frontend
 GOOS=windows
 GOARCH=amd64
-LINUX_BINARY_NAME=pangolin-client
+LINUX_BINARY_NAME=praxis-client
 LINUX_GOARCH ?= $(shell go env GOHOSTARCH)
 PREFIX ?= /usr/local
 LINUX_PKG_DIR=packaging/linux
-GNOME_EXTENSION_UUID=pangolin@pangolin.net
+GNOME_EXTENSION_UUID=praxis@causq.com
 VERSION ?= dev
 NFPM ?= nfpm
-OLM_VERSION := $(shell go list -m -f '{{.Version}}' github.com/fosrl/olm | sed 's/^v//')
-VERSION_LDFLAGS = -X github.com/fosrl/windows-linux/version.Number=$(VERSION) -X github.com/fosrl/windows-linux/version.OlmVersionOverride=$(OLM_VERSION)
+OLM_VERSION := $(shell go list -m -f '{{.Version}}' github.com/CausQ-Networks/praxis-olm | sed 's/^v//')
+VERSION_LDFLAGS = -X github.com/CausQ-Networks/praxis-desktop/version.Number=$(VERSION) -X github.com/CausQ-Networks/praxis-desktop/version.OlmVersionOverride=$(OLM_VERSION)
 
 # Default target
 all: clean rsrc build
@@ -44,7 +44,7 @@ build-linux: frontend
 	@echo "Build complete: $(BUILD_DIR)/$(LINUX_BINARY_NAME)"
 
 # Build the deb, rpm and Arch packages from the Linux binary with nfpm
-# (https://nfpm.goreleaser.com), as build/pangolin-client-<arch>-<version>.*,
+# (https://nfpm.goreleaser.com), as build/praxis-client-<arch>-<version>.*,
 # and the tar.gz below. The in-app updater looks for the package names in the
 # release manifest.
 package-linux: check-release-version build-linux package-linux-tarball
@@ -55,7 +55,7 @@ package-linux: check-release-version build-linux package-linux-tarball
 			$(NFPM) pkg -f $(LINUX_PKG_DIR)/nfpm.yaml -p $$fmt -t $$out || exit 1; \
 	done
 
-# Build build/pangolin-client-<arch>-<version>.tar.gz for distributions with
+# Build build/praxis-client-<arch>-<version>.tar.gz for distributions with
 # no package (Gentoo, Void, ...): the binary and everything the packages
 # install, laid out as in the packages, plus the OpenRC service and an
 # install.sh that puts them in place (packaging/linux/tarball/).
@@ -66,13 +66,13 @@ package-linux-tarball: check-release-version build-linux
 	install -Dm755 $(BUILD_DIR)/$(LINUX_BINARY_NAME) $$dir/bin/$(LINUX_BINARY_NAME) && \
 	install -Dm755 -t $$dir $(LINUX_PKG_DIR)/tarball/install.sh && \
 	install -Dm644 -t $$dir $(LINUX_PKG_DIR)/tarball/README.md LICENSE && \
-	install -Dm644 -t $$dir/share/applications $(LINUX_PKG_DIR)/pangolin-client.desktop && \
-	install -Dm644 -t $$dir/share/icons/hicolor/256x256/apps $(LINUX_PKG_DIR)/pangolin-client.png && \
+	install -Dm644 -t $$dir/share/applications $(LINUX_PKG_DIR)/praxis-client.desktop && \
+	install -Dm644 -t $$dir/share/icons/hicolor/256x256/apps $(LINUX_PKG_DIR)/praxis-client.png && \
 	install -Dm644 -t $$dir/share/gnome-shell/extensions/$(GNOME_EXTENSION_UUID) $(LINUX_PKG_DIR)/gnome-shell-extension/$(GNOME_EXTENSION_UUID)/* && \
-	install -Dm644 -t $$dir/share/polkit-1/actions $(LINUX_PKG_DIR)/net.pangolin.client.policy && \
-	install -Dm644 -t $$dir/etc/xdg/autostart $(LINUX_PKG_DIR)/pangolin-client-autostart.desktop && \
-	install -Dm644 -t $$dir/lib/systemd/system $(LINUX_PKG_DIR)/pangolin-client.service && \
-	install -Dm755 -t $$dir/etc/init.d $(LINUX_PKG_DIR)/openrc/pangolin-client && \
+	install -Dm644 -t $$dir/share/polkit-1/actions $(LINUX_PKG_DIR)/com.causq.praxis.client.policy && \
+	install -Dm644 -t $$dir/etc/xdg/autostart $(LINUX_PKG_DIR)/praxis-client-autostart.desktop && \
+	install -Dm644 -t $$dir/lib/systemd/system $(LINUX_PKG_DIR)/praxis-client.service && \
+	install -Dm755 -t $$dir/etc/init.d $(LINUX_PKG_DIR)/openrc/praxis-client && \
 	tar -C $$root --sort=name --owner=0 --group=0 --numeric-owner -czf $(BUILD_DIR)/$$name.tar.gz $$name && \
 	rm -rf $$root && \
 	echo "Archive: $(BUILD_DIR)/$$name.tar.gz"
@@ -83,27 +83,27 @@ check-release-version:
 
 # Install a Linux build for testing: the binary, the systemd service, the app
 # menu and autostart entries, and the GNOME Shell extension (enable it with
-# "gnome-extensions enable pangolin@pangolin.net" after logging back in).
+# "gnome-extensions enable praxis@causq.com" after logging back in).
 # Packages (deb, rpm, AUR) replace this.
 # Run "make build-linux" first, then "sudo make install-linux" and
-# "sudo systemctl enable --now pangolin-client".
+# "sudo systemctl enable --now praxis-client".
 install-linux:
 	install -Dm755 $(BUILD_DIR)/$(LINUX_BINARY_NAME) $(DESTDIR)$(PREFIX)/bin/$(LINUX_BINARY_NAME)
 	install -d $(DESTDIR)/etc/systemd/system
-	sed 's|/usr/bin/$(LINUX_BINARY_NAME)|$(PREFIX)/bin/$(LINUX_BINARY_NAME)|' $(LINUX_PKG_DIR)/pangolin-client.service > $(DESTDIR)/etc/systemd/system/pangolin-client.service
-	install -Dm644 $(LINUX_PKG_DIR)/pangolin-client.desktop $(DESTDIR)$(PREFIX)/share/applications/pangolin-client.desktop
-	install -Dm644 $(LINUX_PKG_DIR)/pangolin-client-autostart.desktop $(DESTDIR)/etc/xdg/autostart/pangolin-client-autostart.desktop
-	install -Dm644 $(LINUX_PKG_DIR)/pangolin-client.png $(DESTDIR)$(PREFIX)/share/icons/hicolor/256x256/apps/pangolin-client.png
-	install -Dm644 $(LINUX_PKG_DIR)/net.pangolin.client.policy $(DESTDIR)/usr/share/polkit-1/actions/net.pangolin.client.policy
+	sed 's|/usr/bin/$(LINUX_BINARY_NAME)|$(PREFIX)/bin/$(LINUX_BINARY_NAME)|' $(LINUX_PKG_DIR)/praxis-client.service > $(DESTDIR)/etc/systemd/system/praxis-client.service
+	install -Dm644 $(LINUX_PKG_DIR)/praxis-client.desktop $(DESTDIR)$(PREFIX)/share/applications/praxis-client.desktop
+	install -Dm644 $(LINUX_PKG_DIR)/praxis-client-autostart.desktop $(DESTDIR)/etc/xdg/autostart/praxis-client-autostart.desktop
+	install -Dm644 $(LINUX_PKG_DIR)/praxis-client.png $(DESTDIR)$(PREFIX)/share/icons/hicolor/256x256/apps/praxis-client.png
+	install -Dm644 $(LINUX_PKG_DIR)/com.causq.praxis.client.policy $(DESTDIR)/usr/share/polkit-1/actions/com.causq.praxis.client.policy
 	install -Dm644 -t $(DESTDIR)$(PREFIX)/share/gnome-shell/extensions/$(GNOME_EXTENSION_UUID) $(LINUX_PKG_DIR)/gnome-shell-extension/$(GNOME_EXTENSION_UUID)/*
 	-systemctl daemon-reload
 
 uninstall-linux:
-	-systemctl disable --now pangolin-client
-	rm -f $(DESTDIR)$(PREFIX)/bin/$(LINUX_BINARY_NAME) $(DESTDIR)/etc/systemd/system/pangolin-client.service
-	rm -f $(DESTDIR)$(PREFIX)/share/applications/pangolin-client.desktop $(DESTDIR)/etc/xdg/autostart/pangolin-client-autostart.desktop
-	rm -f $(DESTDIR)$(PREFIX)/share/icons/hicolor/256x256/apps/pangolin-client.png
-	rm -f $(DESTDIR)/usr/share/polkit-1/actions/net.pangolin.client.policy
+	-systemctl disable --now praxis-client
+	rm -f $(DESTDIR)$(PREFIX)/bin/$(LINUX_BINARY_NAME) $(DESTDIR)/etc/systemd/system/praxis-client.service
+	rm -f $(DESTDIR)$(PREFIX)/share/applications/praxis-client.desktop $(DESTDIR)/etc/xdg/autostart/praxis-client-autostart.desktop
+	rm -f $(DESTDIR)$(PREFIX)/share/icons/hicolor/256x256/apps/praxis-client.png
+	rm -f $(DESTDIR)/usr/share/polkit-1/actions/com.causq.praxis.client.policy
 	rm -rf $(DESTDIR)$(PREFIX)/share/gnome-shell/extensions/$(GNOME_EXTENSION_UUID)
 	-systemctl daemon-reload
 

@@ -5,10 +5,10 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/version"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/version"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -23,7 +23,7 @@ const (
 	updatePhaseError       = "error"
 	updatePhaseComplete    = "complete"
 	// updatePhaseInstalling is a UI started while the Linux daemon installs a
-	// silently downloaded update; Pangolin opens once it is installed.
+	// silently downloaded update; Praxis opens once it is installed.
 	updatePhaseInstalling = "installing"
 )
 

@@ -2,15 +2,15 @@
 <!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
-<!-- Lets users outside the sudo and wheel groups install the Pangolin CLI
+<!-- Lets users outside the sudo and wheel groups install the Praxis CLI
      with an administrator's password. See managers/cli_installer_linux.go. -->
 <policyconfig>
-  <vendor>Fossorial, Inc.</vendor>
-  <vendor_url>https://pangolin.net</vendor_url>
-  <icon_name>pangolin-client</icon_name>
-  <action id="net.pangolin.client.install-cli">
-    <description>Install the Pangolin CLI</description>
-    <message>Authentication is required to install the Pangolin CLI</message>
+  <vendor>CausQ Networks</vendor>
+  <vendor_url>https://praxis.causq.com</vendor_url>
+  <icon_name>praxis-client</icon_name>
+  <action id="com.causq.praxis.client.install-cli">
+    <description>Install the Praxis CLI</description>
+    <message>Authentication is required to install the Praxis CLI</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
       <allow_inactive>auth_admin</allow_inactive>

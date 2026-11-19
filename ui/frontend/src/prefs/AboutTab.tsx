@@ -22,7 +22,7 @@ export function AboutTab() {
 
       <Section header="Resources">
         <LinkRow href={urls.docs}>Documentation</LinkRow>
-        <LinkRow href={urls.howItWorks}>How Pangolin Works</LinkRow>
+        <LinkRow href={urls.howItWorks}>How Praxis Works</LinkRow>
       </Section>
 
       <Section header="Legal">

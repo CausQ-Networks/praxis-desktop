@@ -5,9 +5,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/auth"
-	"github.com/fosrl/windows-linux/managers"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
 )
 
 // AccountRow is one account in Preferences > Accounts.

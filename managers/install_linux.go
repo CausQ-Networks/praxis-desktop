@@ -12,12 +12,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 )
 
 // On Linux each tunnel runs as a child process of the daemon,
-// "pangolin-client --tunnel <config>", in place of a Windows service.
+// "praxis-client --tunnel <config>", in place of a Windows service.
 
 const tunnelStopTimeout = 30 * time.Second
 

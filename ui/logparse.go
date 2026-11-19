@@ -23,7 +23,7 @@ func (l LogLine) String() string {
 
 var (
 	// LEVEL: YYYY/MM/DD HH:MM:SS message (pangolin format)
-	logPangolinRe = regexp.MustCompile(`^(\w+):\s+(\d{4}/\d{2}/\d{2}\s+\d{2}:\d{2}:\d{2})\s+(.+)$`)
+	logPraxisRe = regexp.MustCompile(`^(\w+):\s+(\d{4}/\d{2}/\d{2}\s+\d{2}:\d{2}:\d{2})\s+(.+)$`)
 	// [2006-01-02 15:04:05.000] [LEVEL] message
 	logBracketRe = regexp.MustCompile(`^\[([^\]]+)\]\s+\[([^\]]+)\]\s+(.+)$`)
 	// 2006-01-02T15:04:05.000Z level message
@@ -42,7 +42,7 @@ func parseLogLine(line string) *LogLine {
 		return nil
 	}
 
-	if m := logPangolinRe.FindStringSubmatch(line); len(m) == 4 {
+	if m := logPraxisRe.FindStringSubmatch(line); len(m) == 4 {
 		if t, err := parseTimestamp(m[2]); err == nil {
 			return &LogLine{Stamp: t, Level: m[1], Line: m[3]}
 		}

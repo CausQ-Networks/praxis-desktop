@@ -8,12 +8,12 @@ import (
 )
 
 // linuxDirName names this app's directories under XDG, /etc and /var. The
-// Pangolin CLI already uses "pangolin" for ~/.config, /etc and /var/log, with
+// Praxis CLI already uses "praxis" for ~/.config, /etc and /var/log, with
 // files of the same names (accounts.json), so the client keeps apart.
-const linuxDirName = "pangolin-client"
+const linuxDirName = "praxis-client"
 
 // UserDataDir is the per-user directory for config, accounts and caches:
-// $XDG_CONFIG_HOME/pangolin-client, normally ~/.config/pangolin-client.
+// $XDG_CONFIG_HOME/praxis-client, normally ~/.config/praxis-client.
 func UserDataDir() string {
 	if dir, err := os.UserConfigDir(); err == nil {
 		return filepath.Join(dir, linuxDirName)
@@ -21,14 +21,14 @@ func UserDataDir() string {
 	return filepath.Join(homeDir(), ".config", linuxDirName)
 }
 
-// GetProgramDataDir returns the daemon's state directory, /var/lib/pangolin-client.
+// GetProgramDataDir returns the daemon's state directory, /var/lib/praxis-client.
 func GetProgramDataDir() string {
 	return filepath.Join("/var/lib", linuxDirName)
 }
 
-// GetLogDir returns the log directory: /var/log/pangolin-client for the root
-// daemon, and $XDG_STATE_HOME/pangolin-client/logs (normally
-// ~/.local/state/pangolin-client/logs) for the UI, which runs as the user and
+// GetLogDir returns the log directory: /var/log/praxis-client for the root
+// daemon, and $XDG_STATE_HOME/praxis-client/logs (normally
+// ~/.local/state/praxis-client/logs) for the UI, which runs as the user and
 // cannot write under /var/log.
 func GetLogDir() string {
 	if os.Geteuid() == 0 {
@@ -41,17 +41,17 @@ func GetLogDir() string {
 	return filepath.Join(state, linuxDirName, "logs")
 }
 
-// DaemonLogDir is where the root daemon and tunnels log, /var/log/pangolin-client.
+// DaemonLogDir is where the root daemon and tunnels log, /var/log/praxis-client.
 func DaemonLogDir() string {
 	return filepath.Join("/var/log", linuxDirName)
 }
 
-// RuntimeDir holds the daemon's sockets and tunnel configs, /run/pangolin-client.
+// RuntimeDir holds the daemon's sockets and tunnel configs, /run/praxis-client.
 func RuntimeDir() string {
 	return filepath.Join("/run", linuxDirName)
 }
 
-// systemConfigPath is the machine-wide config file, /etc/pangolin-client/pangolin.json.
+// systemConfigPath is the machine-wide config file, /etc/praxis-client/praxis.json.
 func systemConfigPath() string {
 	return filepath.Join("/etc", linuxDirName, ConfigFileName)
 }

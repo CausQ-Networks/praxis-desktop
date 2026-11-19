@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // polkitTimeout bounds how long an authentication dialog can stay open.
@@ -65,7 +65,7 @@ func polkitAuthorize(action, subject string) error {
 		return errors.New("timed out waiting for authentication")
 	}
 	if strings.Contains(detail, "is not registered") {
-		return fmt.Errorf("polkit doesn't know the %s action; reinstall Pangolin", action)
+		return fmt.Errorf("polkit doesn't know the %s action; reinstall Praxis", action)
 	}
 	var exitErr *exec.ExitError
 	if errors.As(err, &exitErr) {

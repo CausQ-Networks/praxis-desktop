@@ -1,23 +1,23 @@
 [Unit]
-Description=Pangolin client background service
-Documentation=https://docs.pangolin.net
+Description=Praxis client background service
+Documentation=https://docs.praxis.causq.com
 Wants=network-online.target
 After=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/pangolin-client --daemon
+ExecStart=/usr/bin/praxis-client --daemon
 Restart=on-failure
 RestartSec=2
 # SIGTERM goes to the daemon only, which stops each tunnel cleanly so DNS and
 # routes are restored; anything left is killed when the timeout runs out.
 KillMode=mixed
 TimeoutStopSec=45
-RuntimeDirectory=pangolin-client
+RuntimeDirectory=praxis-client
 RuntimeDirectoryMode=0755
-StateDirectory=pangolin-client
+StateDirectory=praxis-client
 StateDirectoryMode=0700
-LogsDirectory=pangolin-client
+LogsDirectory=praxis-client
 LogsDirectoryMode=0755
 
 [Install]

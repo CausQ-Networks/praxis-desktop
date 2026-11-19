@@ -3,23 +3,23 @@ package ui
 import (
 	"sync"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"github.com/godbus/dbus/v5"
 	"github.com/godbus/dbus/v5/introspect"
 	"github.com/godbus/dbus/v5/prop"
 )
 
-// The Pangolin GNOME Shell extension (packaging/linux/gnome-shell-extension)
+// The Praxis GNOME Shell extension (packaging/linux/gnome-shell-extension)
 // shows the panel button on GNOME, where the AppIndicator extension only
 // opens the popup on a double click. The app serves this D-Bus interface for
 // it; while the extension holds shellExtensionBusName, the
 // StatusNotifierItem goes passive so there is one icon.
 
 const (
-	shellBusName          = "net.pangolin.Client"
-	shellPath             = dbus.ObjectPath("/net/pangolin/Client")
-	shellIface            = "net.pangolin.Client1"
-	shellExtensionBusName = "net.pangolin.Client.ShellExtension"
+	shellBusName          = "com.causq.praxis.Client"
+	shellPath             = dbus.ObjectPath("/net/praxis/Client")
+	shellIface            = "com.causq.praxis.Client1"
+	shellExtensionBusName = "com.causq.praxis.Client.ShellExtension"
 )
 
 var (
@@ -129,7 +129,7 @@ func setShellExtensionActive(active bool) {
 	shellExtOn = active
 	shellMu.Unlock()
 	if changed {
-		logger.Info("Pangolin GNOME extension active: %v", active)
+		logger.Info("Praxis GNOME extension active: %v", active)
 	}
 	trayGeomMu.Lock()
 	item := trayItem

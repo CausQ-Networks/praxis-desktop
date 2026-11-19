@@ -15,9 +15,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 	"golang.org/x/sys/unix"
 )
 
@@ -31,7 +31,7 @@ import (
 const (
 	daemonRequestAttachUI byte = 'U' // reply: attachStatus, plus pipe FDs on success
 	daemonRequestUIAction byte = 'A' // followed by a uint32 UIAction; reply: 0 delivered, 1 no UI
-	// daemonRequestCLISecrets serves the Pangolin CLI's companion mode. It is
+	// daemonRequestCLISecrets serves the Praxis CLI's companion mode. It is
 	// followed by a uint32 UID, then the request in cli_secrets.go. The UID
 	// must be the caller's own, except that root (the CLI under sudo) may
 	// name the user it acts for.
@@ -71,7 +71,7 @@ var (
 
 // Run runs the daemon until SIGTERM or SIGINT.
 func Run() error {
-	logger.Info("Pangolin daemon starting")
+	logger.Info("Praxis daemon starting")
 	if os.Geteuid() != 0 {
 		return errors.New("the daemon must run as root")
 	}
@@ -112,7 +112,7 @@ func Run() error {
 			go handleDaemonConn(conn)
 		}
 	}()
-	logger.Info("Pangolin daemon listening on %s", socketPath)
+	logger.Info("Praxis daemon listening on %s", socketPath)
 	// An update downloaded before the daemon last stopped is installed before
 	// any UI starts, as the Windows service does; UIs that start meanwhile wait.
 	loadStagedUpdate()
@@ -124,14 +124,14 @@ func Run() error {
 	go checkForUpdates()
 
 	sig := <-signals
-	logger.Info("Pangolin daemon stopping on %v", sig)
+	logger.Info("Praxis daemon stopping on %v", sig)
 	attachedUIsLock.Lock()
 	daemonStopping = true
 	attachedUIsLock.Unlock()
 	listener.Close()
 	IPCServerNotifyManagerStopping()
 	stopAllTunnelProcesses()
-	logger.Info("Pangolin daemon stopped")
+	logger.Info("Praxis daemon stopped")
 	return nil
 }
 
@@ -282,7 +282,7 @@ func attachUI(conn *net.UnixConn, uid uint32, pid int32) {
 const quitSignOutGrace = 2 * time.Second
 
 // installStagedUpdateAfterQuit installs a silently downloaded update once the
-// user quits Pangolin, if no other UI is running, as on Windows. Sign-out and
+// user quits Praxis, if no other UI is running, as on Windows. Sign-out and
 // Always-On (which relaunches the UI, so the launch installs it) don't count.
 // It reports whether an install started.
 func installStagedUpdateAfterQuit(uid uint32, key string) bool {
@@ -412,7 +412,7 @@ func launchUIForUser(uid uint32) error {
 		return err
 	}
 	out, err := exec.Command("systemd-run", "--user", "--machine="+u.Username+"@.host",
-		"--collect", "--quiet", "--unit=pangolin-client-ui-"+strconv.FormatInt(time.Now().Unix(), 10),
+		"--collect", "--quiet", "--unit=praxis-client-ui-"+strconv.FormatInt(time.Now().Unix(), 10),
 		exe).CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("%v: %s", err, out)

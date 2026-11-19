@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/managers"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
 )
 
 const (
@@ -33,7 +33,7 @@ type Settings struct {
 	MTU                     string `json:"mtu"`
 	ExitNodeTakesPrecedence bool   `json:"exitNodeTakesPrecedence"`
 	// AutoDownloadUpdates downloads updates silently and installs them the next
-	// time Pangolin quits or starts. It is an application setting, so always global.
+	// time Praxis quits or starts. It is an application setting, so always global.
 	AutoDownloadUpdates bool `json:"autoDownloadUpdates"`
 	// AutoDownloadUpdatesUnavailable explains why this copy can't install updates
 	// itself (Linux AUR and hand-installed builds); empty when it can.

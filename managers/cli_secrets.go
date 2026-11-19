@@ -5,13 +5,13 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
-// Companion mode: the Pangolin CLI signs in with this app's session. It reads
+// Companion mode: the Praxis CLI signs in with this app's session. It reads
 // account details from the user's accounts.json and asks the manager for the
 // secrets, which only the manager can read. The request is a little-endian
-// uint32 length and the Pangolin user id; the reply is a uint32 status, a
+// uint32 length and the Praxis user id; the reply is a uint32 status, a
 // uint32 length and a payload (secrets JSON, or an error message). Windows
 // serves this on a named pipe, Linux on the daemon socket.
 

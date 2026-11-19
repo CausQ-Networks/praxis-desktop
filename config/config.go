@@ -8,13 +8,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 const (
-	AppName                             = "Pangolin"
-	DefaultHostname                     = "https://app.pangolin.net"
+	AppName                             = "Praxis"
+	DefaultHostname                     = "https://app.praxis.causq.com"
 	ConfigFileName                      = "pangolin.json"
 	LogLevel                            = "info"
 	DefaultDNSOverride                  = true
@@ -28,7 +28,7 @@ const (
 )
 
 // Config represents the per-user application configuration stored under
-// %LOCALAPPDATA%\Pangolin\pangolin.json (or %APPDATA% as a fallback).
+// %LOCALAPPDATA%\Praxis\pangolin.json (or %APPDATA% as a fallback).
 type Config struct {
 	DNSOverride                  *bool    `json:"dnsOverride,omitempty"`
 	DNSTunnel                    *bool    `json:"dnsTunnel,omitempty"`
@@ -59,7 +59,7 @@ type Config struct {
 }
 
 // SystemConfig represents machine-wide configuration stored under
-// %ProgramData%\Pangolin\pangolin.json. It supports the same settings as
+// %ProgramData%\Praxis\pangolin.json. It supports the same settings as
 // per-user config plus system-only fields like log level.
 type SystemConfig struct {
 	Config
@@ -349,7 +349,7 @@ func (cm *ConfigManager) GetOpenUIAtLogin() bool {
 }
 
 // GetAutoDownloadUpdates reports whether updates are downloaded silently and
-// installed the next time Pangolin quits or launches. Omitted defaults to false.
+// installed the next time Praxis quits or launches. Omitted defaults to false.
 func (cm *ConfigManager) GetAutoDownloadUpdates() bool {
 	cm.mu.RLock()
 	defer cm.mu.RUnlock()
@@ -637,7 +637,7 @@ func CheckForUpdatesButtonEnabled() bool {
 }
 
 // AutoDownloadUpdatesEnabled reports whether the merged machine and per-user
-// config download updates silently and install them the next time Pangolin quits
+// config download updates silently and install them the next time Praxis quits
 // or launches. localAppData is that user's LOCALAPPDATA directory, or empty for the
 // machine config alone. The manager service must pass it explicitly, because its own
 // process environment is the system profile. Omitted defaults to false.

@@ -11,9 +11,9 @@ import type {
   StatusView,
   TrayLayout,
   UpdateInfo,
-} from "../bindings/github.com/fosrl/windows-linux/ui/models";
+} from "../bindings/github.com/CausQ-Networks/praxis-desktop/ui/models";
 
-export type * from "../bindings/github.com/fosrl/windows-linux/ui/models";
+export type * from "../bindings/github.com/CausQ-Networks/praxis-desktop/ui/models";
 import { Events } from "./runtime";
 
 const params = new URLSearchParams(window.location.search);
@@ -53,7 +53,7 @@ const tunnel: Row[] = [
     items: connected
       ? [
           it("sites.openStatus", "Open Status…"), sep, hdr("3 Sites"),
-          site(-1, "Pangolin Server", "green", "Connected", "—", "203.0.113.10:51820", "4s ago"),
+          site(-1, "Praxis Server", "green", "Connected", "—", "203.0.113.10:51820", "4s ago"),
           site(3, "Home Lab", "green", "Connected", "Direct", "198.51.100.7:51820", "1m ago"),
           site(7, "Office", "yellow", "Connecting", "Relay", "—", "—"),
         ]
@@ -90,10 +90,10 @@ return {
     it("preferences", "Preferences…"),
     row({
       id: "more", kind: "submenu", label: "More",
-      items: [hdr("Support"), it("more.howItWorks", "How Pangolin Works"), it("more.docs", "Documentation"), sep, hdr("© 2026 Fossorial, Inc."), it("more.terms", "Terms of Service"), it("more.privacy", "Privacy Policy"), sep, hdr("Version 0.9.0"), it("more.checkUpdates", "Check for Updates…"), it("more.installCLI", "Install Pangolin CLI…")],
+      items: [hdr("Support"), it("more.howItWorks", "How Praxis Works"), it("more.docs", "Documentation"), sep, hdr("© 2026 Fossorial, Inc."), it("more.terms", "Terms of Service"), it("more.privacy", "Privacy Policy"), sep, hdr("Version 0.9.0"), it("more.checkUpdates", "Check for Updates…"), it("more.installCLI", "Install Praxis CLI…")],
     }),
     sep,
-    it("quit", "Quit Pangolin"),
+    it("quit", "Quit Praxis"),
     sep,
     lbl("Community Edition. Consider supporting."),
   ],
@@ -125,16 +125,16 @@ const settings: Settings = {
   primaryDns: "", secondaryDns: "", mtu: "1280", exitNodeTakesPrecedence: false,
   autoDownloadUpdates: false,
   autoDownloadUpdatesUnavailable: params.has("aur")
-    ? "Pangolin was installed from the AUR. Update the pangolin-client-bin package with your AUR helper, for example: yay -Syu pangolin-client-bin"
+    ? "Praxis was installed from the AUR. Update the praxis-client-bin package with your AUR helper, for example: yay -Syu praxis-client-bin"
     : "",
   disabled: params.has("disabled"),
   orgName: "Fossorial", orgMode: params.has("orgMode"), managed: params.has("managed") ? ["dnsTunnel", "mtu"] : [],
 };
 
 const status: StatusView = {
-  stateText: "Connected", color: "green", version: "1.9.0", agent: "Pangolin Windows", orgId: "fossorial", gateway: "Active",
+  stateText: "Connected", color: "green", version: "1.9.0", agent: "Praxis Windows", orgId: "fossorial", gateway: "Active",
   sites: [
-    { id: -1, name: "Pangolin Server", endpoint: "203.0.113.10:51820", status: "Connected", color: "green", connection: "", lastSeen: new Date(Date.now() - 4000).toISOString(), gateway: false },
+    { id: -1, name: "Praxis Server", endpoint: "203.0.113.10:51820", status: "Connected", color: "green", connection: "", lastSeen: new Date(Date.now() - 4000).toISOString(), gateway: false },
     { id: 3, name: "Home Lab", endpoint: "198.51.100.7:51820", status: "Connected", color: "green", connection: "Direct", lastSeen: new Date(Date.now() - 90000).toISOString(), gateway: true },
     { id: 7, name: "Office", endpoint: "", status: "Connecting", color: "yellow", connection: "Relay", lastSeen: "", gateway: false },
   ],
@@ -155,15 +155,15 @@ const logs: LogsSnapshot = {
 const accounts: AccountsView = {
   busyUserId: "", tunnelStarting: false,
   accounts: params.get("accounts") === "none" ? [] : [
-    { userId: "1", displayName: "milo@pangolin.net", host: "app.pangolin.net", hostname: "https://app.pangolin.net", subtitle: "app.pangolin.net · Fossorial", active: true, locked: false },
-    { userId: "2", displayName: "ops@example.com", host: "pangolin.example.com", hostname: "https://pangolin.example.com", subtitle: "pangolin.example.com", active: false, locked: false },
-    { userId: "3", displayName: "lab@home.arpa", host: "pangolin.home.arpa", hostname: "https://pangolin.home.arpa", subtitle: "pangolin.home.arpa · Login required", active: false, locked: true },
+    { userId: "1", displayName: "milo@pangolin.net", host: "app.praxis.causq.com", hostname: "https://app.praxis.causq.com", subtitle: "app.praxis.causq.com · Fossorial", active: true, locked: false },
+    { userId: "2", displayName: "ops@example.com", host: "pangolin.example.com", hostname: "https://praxis.example.com", subtitle: "pangolin.example.com", active: false, locked: false },
+    { userId: "3", displayName: "lab@home.arpa", host: "pangolin.home.arpa", hostname: "https://praxis.home.arpa", subtitle: "pangolin.home.arpa · Login required", active: false, locked: true },
   ],
 };
 
 // Login sheet: `?step=` previews a step; otherwise Continue walks through them.
 const loginView = (step: string, extra: Partial<LoginView> = {}): LoginView => ({
-  session: 1, step, host: "app.pangolin.net", code: "ABCD-EFGH", email: "milo@pangolin.net", error: "",
+  session: 1, step, host: "app.praxis.causq.com", code: "ABCD-EFGH", email: "milo@pangolin.net", error: "",
   renewing: false, fixedHost: false, selfHosted: false, serverUrl: "", ...extra,
 });
 function mockLoginStart(hostname: string) {
@@ -235,9 +235,9 @@ let update: UpdateInfo = {
   activity: "Downloading update", error: "The download could not be verified.",
   bytesDownloaded: 12_400_000, bytesTotal: 38_000_000,
   manual: params.has("manualUpdate")
-    ? "Pangolin was installed from the AUR. Update the pangolin-client-bin package with your AUR helper, for example:"
+    ? "Praxis was installed from the AUR. Update the praxis-client-bin package with your AUR helper, for example:"
     : "",
-  manualCommand: params.has("manualUpdate") ? "yay -Syu pangolin-client-bin" : "",
+  manualCommand: params.has("manualUpdate") ? "yay -Syu praxis-client-bin" : "",
 };
 const setUpdate = (u: Partial<UpdateInfo>) => {
   update = { ...update, ...u };

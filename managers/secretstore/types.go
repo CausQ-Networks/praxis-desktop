@@ -1,6 +1,6 @@
 package secretstore
 
-// UserSecrets holds per-Pangolin-account credentials for one Windows user profile.
+// UserSecrets holds per-Praxis-account credentials for one Windows user profile.
 type UserSecrets struct {
 	SessionToken string `json:"sessionToken,omitempty"`
 	OlmId        string `json:"olmId,omitempty"`

@@ -12,13 +12,13 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/crypto/blake2b"
 )
 
-// A downloaded update is kept in /var/lib/pangolin-client/updates so it
-// survives reboots and can be installed the next time Pangolin quits or
+// A downloaded update is kept in /var/lib/praxis-client/updates so it
+// survives reboots and can be installed the next time Praxis quits or
 // launches, as on Windows. The signed manifest it came from is kept beside it,
 // and both are checked again before installing. The directory is root-only.
 const (

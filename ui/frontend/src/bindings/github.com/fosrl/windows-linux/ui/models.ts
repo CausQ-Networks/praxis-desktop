@@ -228,7 +228,7 @@ export interface Settings {
 
     /**
      * AutoDownloadUpdates downloads updates silently and installs them the next
-     * time Pangolin quits or starts. It is an application setting, so always global.
+     * time Praxis quits or starts. It is an application setting, so always global.
      */
     "autoDownloadUpdates": boolean;
 
@@ -281,7 +281,7 @@ export interface StatusSite {
     "color": string;
 
     /**
-     * Connection is "Local", "Relay" or "Direct"; empty for the Pangolin Server row.
+     * Connection is "Local", "Relay" or "Direct"; empty for the Praxis Server row.
      */
     "connection": string;
 

@@ -11,12 +11,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 
-	"github.com/fosrl/windows-linux/fingerprint"
-	"github.com/fosrl/windows-linux/managers/secretstore"
-	"github.com/fosrl/windows-linux/tunnel"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-desktop/fingerprint"
+	"github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 )
 
 // RunTunnelService is exported so main.go can call it

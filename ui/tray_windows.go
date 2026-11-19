@@ -20,7 +20,7 @@ func setupSystemTray() {
 	systemTray.OnClick(toggleTrayPopup)
 	// Right-click shows only Quit, like the macOS status item's context menu.
 	contextMenu := application.NewMenu()
-	contextMenu.Add("Quit Pangolin").OnClick(func(*application.Context) { go quit() })
+	contextMenu.Add("Quit Praxis").OnClick(func(*application.Context) { go quit() })
 	systemTray.SetMenu(contextMenu)
 	systemTray.OnRightClick(func() {
 		hideTrayPopup()

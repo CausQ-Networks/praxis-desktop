@@ -12,7 +12,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"golang.org/x/sys/windows"
 )
 
@@ -110,7 +110,7 @@ func runMsi(msi *tempFile, userToken uintptr, silent bool) error {
 
 // runMsiInSession installs the MSI as SYSTEM, showing basic progress without a cancel
 // button on session's desktop, for an update installed while the user waits for
-// Pangolin to launch. Like the silent install, it never reboots.
+// Praxis to launch. Like the silent install, it never reboots.
 func runMsiInSession(msi *tempFile, session uint32) error {
 	logger.Debug("Updater: runMsiInSession() called for session %d", session)
 

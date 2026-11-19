@@ -1,6 +1,6 @@
 package secrets
 
-import "github.com/fosrl/windows-linux/managers/secretstore"
+import "github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
 
 // IPCAPI is implemented by the manager IPC client and registered at UI startup.
 type IPCAPI interface {

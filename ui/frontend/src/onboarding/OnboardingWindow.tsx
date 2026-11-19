@@ -2,11 +2,11 @@ import { useEffect, useState, type ReactNode } from "react";
 import { OnboardingService, type OnboardingState } from "@bindings";
 import { Button, cx, openExternal } from "../components/controls";
 import { isLinux, report, urls, useEvent } from "../lib";
-import logoLight from "../assets/pangolin_logo_light.png";
-import logoDark from "../assets/pangolin_logo_dark.png";
+import logoLight from "../assets/praxis_logo_light.png";
+import logoDark from "../assets/praxis_logo_dark.png";
 import trayIcon from "../assets/tray_icon.png";
 
-// Pangolin Setup, as in the macOS app's MacOnboardingFlowView: welcome →
+// Praxis Setup, as in the macOS app's MacOnboardingFlowView: welcome →
 // privacy, then "You're All Set" when there is no account yet. The macOS
 // system extension and VPN configuration pages have no Windows counterpart.
 
@@ -156,18 +156,18 @@ function WelcomePage() {
       <div className="min-h-6 flex-1" />
       <picture className="mb-6">
         <source srcSet={logoDark} media="(prefers-color-scheme: dark)" />
-        <img src={logoLight} alt="Pangolin" className="h-[60px]" />
+        <img src={logoLight} alt="Praxis" className="h-[60px]" />
       </picture>
       <div className="mb-2">
-        <Title>Welcome to Pangolin</Title>
+        <Title>Welcome to Praxis</Title>
       </div>
       <Body>
-        Pangolin securely connects your devices to your private networks, so you can safely access internal apps and
+        Praxis securely connects your devices to your private networks, so you can safely access internal apps and
         resources from anywhere.
       </Body>
       <div className="flex-1" />
       <div className="flex gap-1 pt-2 text-[10px]">
-        <span className="text-mac-secondary">New to Pangolin?</span>
+        <span className="text-mac-secondary">New to Praxis?</span>
         <Link href={urls.howItWorks}>Learn more.</Link>
       </div>
       <div className="h-4 shrink-0" />
@@ -191,7 +191,7 @@ function PrivacyPage() {
           </p>
           <p>Your traffic is end-to-end encrypted and is never readable by us or anyone outside your network.</p>
           <p>
-            If you're using a self-hosted Pangolin server, all data remains on your server and is never sent to our
+            If you're using a self-hosted Praxis server, all data remains on your server and is never sent to our
             servers.
           </p>
         </div>
@@ -219,8 +219,8 @@ function AllSetPage() {
         <img src={trayIcon} alt="" className="h-[44px]" />
         <div className="text-center text-[13px] font-bold">
           {isLinux
-            ? "Look for the Pangolin icon in your panel or top bar to log in."
-            : "Look for the Pangolin icon in the system tray to log in."}
+            ? "Look for the Praxis icon in your panel or top bar to log in."
+            : "Look for the Praxis icon in the system tray to log in."}
         </div>
       </div>
       <div className="flex-1" />

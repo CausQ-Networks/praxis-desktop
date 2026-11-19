@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 func versionNewerThanUs(candidate string) (bool, error) {

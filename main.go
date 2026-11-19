@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/api"
-	"github.com/fosrl/windows-linux/auth"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/secrets"
-	"github.com/fosrl/windows-linux/ui"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/api"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/secrets"
+	"github.com/CausQ-Networks/praxis-desktop/ui"
 )
 
 // runUI creates the managers the UI works with and runs the tray UI until it

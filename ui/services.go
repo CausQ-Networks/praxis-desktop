@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 // Services bound to the frontend. Each method runs on its own goroutine, so
@@ -103,7 +103,7 @@ type AppService struct{}
 func (AppService) Info() AppInfo { return AppInfo{Version: version.Number, Year: time.Now().Year()} }
 func (AppService) OpenURL(url string) {
 	// Only the fixed docs and legal links are opened from the frontend.
-	if strings.HasPrefix(url, "https://docs.pangolin.net/") || strings.HasPrefix(url, "https://pangolin.net/") {
+	if strings.HasPrefix(url, "https://docs.praxis.causq.com/") || strings.HasPrefix(url, "https://praxis.net/") {
 		openURL(url)
 	}
 }

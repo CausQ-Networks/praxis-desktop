@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Praxis
+GenericName=Praxis Client
+Comment=Connect to your Praxis networks
+Exec=praxis-client
+Icon=praxis-client
+Terminal=false
+Categories=Network;
+Keywords=VPN;Praxis;Tunnel;
+StartupNotify=false
+StartupWMClass=praxis-client

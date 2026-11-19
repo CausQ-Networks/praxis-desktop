@@ -5,7 +5,7 @@ import (
 	"image/png"
 	"testing"
 
-	"github.com/fosrl/windows-linux/icons"
+	"github.com/CausQ-Networks/praxis-desktop/icons"
 )
 
 func TestICOToPNG(t *testing.T) {

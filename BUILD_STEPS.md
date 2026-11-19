@@ -64,7 +64,7 @@ Windows and Linux are released separately, each from its own tag and with its
 own GitHub release.
 
 CI (`.github/workflows/windows.yml`) does all of this when a `windows-` tag is
-pushed: it builds `Pangolin.exe`, signs it with the DigiCert certificate
+pushed: it builds `Praxis.exe`, signs it with the DigiCert certificate
 (jsign), builds and signs `pangolin-amd64-<version>.msi`, makes and signs the
 update manifest, and attaches both to a draft GitHub release. Push a tag named
 `windows-` and the version (e.g. `windows-1.0.3` or `windows-1.0.3-rc.1`).
@@ -84,7 +84,7 @@ The steps below are the manual equivalent.
 make build VERSION=1.0.3
 ```
 
-This builds the frontend (`ui/frontend/dist`) and creates `build/Pangolin.exe`
+This builds the frontend (`ui/frontend/dist`) and creates `build/Praxis.exe`
 with the version set in `version.Number`.
 
 To preview the UI in a desktop browser without Windows, run `npm run mock` in `ui/frontend` and open `http://localhost:5173/#/tray`, `#/preferences`, `#/login` or `#/progress?kind=update`. Mock mode swaps the Go services for fake data.
@@ -105,7 +105,7 @@ This creates `build\pangolin-amd64-1.0.3.msi`.
 ./scripts/generate-manifest.sh
 
 # Or specify files manually
-./scripts/generate-manifest.sh build/pangolin-amd64-1.0.1.msi
+./scripts/generate-manifest.sh build/praxis-amd64-1.0.1.msi
 ```
 
 This creates `build/filelist.txt` with BLAKE2b-256 hashes of all MSI files.
@@ -126,7 +126,7 @@ Upload the following files to your update server:
    - Example: `/windows-client/latest.sig`
 
 2. **MSI files** → Upload to path specified in `updater/constants.go` (`msiPath`)
-   - Example: `/windows-client/pangolin-amd64-1.0.1.msi`
+   - Example: `/windows-client/praxis-amd64-1.0.1.msi`
 
 ## Linux Release Workflow
 
@@ -150,12 +150,12 @@ make package-linux VERSION=1.0.3                     # this machine's architectu
 make package-linux VERSION=1.0.3 LINUX_GOARCH=arm64  # on an arm64 machine
 ```
 
-This makes `build/pangolin-client-<arch>-<version>.deb`, `.rpm` and
+This makes `build/praxis-client-<arch>-<version>.deb`, `.rpm` and
 `.pkg.tar.zst`. Packages built for release should come from Ubuntu 22.04 (as CI
 does), so they run on Ubuntu 22.04+, Debian 12+, Fedora and Arch. RHEL 9 and its
 rebuilds don't ship WebKitGTK 4.1, so they can't install the package.
 
-Each package installs the binary, the `pangolin-client` systemd service (enabled
+Each package installs the binary, the `praxis-client` systemd service (enabled
 and started on install), the app menu and autostart entries, and the GNOME Shell
 extension. Arch users install the `.pkg.tar.zst` from the release with
 `sudo pacman -U <file>`.
@@ -179,7 +179,7 @@ The manifest points at the packages on the GitHub release by default (set
 2. Upload `linux-latest.sig` to the update server as `/linux-client/latest.sig`
    (`latestVersionPath` in `updater/constants_linux.go`).
 3. Publishing the release runs `.github/workflows/aur.yml`, which updates the
-   `pangolin-client-bin` AUR package when the `AUR_SSH_PRIVATE_KEY` secret is set
+   `praxis-client-bin` AUR package when the `AUR_SSH_PRIVATE_KEY` secret is set
    (not set up yet: there is no AUR account).
 
 ### How Linux Updates Install
@@ -188,9 +188,9 @@ The daemon checks the Linux manifest like the Windows manager does. On deb, rpm
 and Arch installs, an administrator (root or a member of `sudo`, `wheel` or `admin`) can
 install an update from the app: the daemon downloads the package, checks its
 hash against the signed manifest, and installs it with `apt-get`, `dnf`,
-`zypper`, `rpm` or `pacman -U` in a transient systemd unit (`pangolin-client-update-*`), so the
+`zypper`, `rpm` or `pacman -U` in a transient systemd unit (`praxis-client-update-*`), so the
 install survives the package restarting the daemon. The new daemon reopens the
 UIs that were open. The AUR package (which marks itself `aur` in
-`/usr/share/pangolin-client/package-format`, as its AUR helper updates it) and
+`/usr/share/praxis-client/package-format`, as its AUR helper updates it) and
 hand-installed builds show the command or download link instead
 (`updater.ManualUpdate`).

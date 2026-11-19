@@ -6,7 +6,7 @@ import { report, useEvent } from "../lib";
 
 const close = () => report(CLIService.Close());
 
-/** Confirms the Pangolin CLI install, then shows its progress and result in the same window. */
+/** Confirms the Praxis CLI install, then shows its progress and result in the same window. */
 export function CLIWindow() {
   const [info, setInfo] = useState<CLIInfo | null>(null);
 
@@ -23,7 +23,7 @@ export function CLIWindow() {
   let buttons: ReactNode;
   switch (info.phase) {
     case "installing":
-      title = "Installing Pangolin CLI…";
+      title = "Installing Praxis CLI…";
       body = (
         <div className="mt-3 flex flex-col gap-1.5">
           <ProgressBar />
@@ -33,7 +33,7 @@ export function CLIWindow() {
       buttons = <Button onClick={close}>Hide</Button>;
       break;
     case "done":
-      title = "Pangolin CLI installed";
+      title = "Praxis CLI installed";
       body = (
         <DialogMessage>
           The CLI was added to your PATH. Open a new terminal to use the <code className="font-mono text-[12px] text-mac-label">pangolin</code>{" "}
@@ -59,10 +59,10 @@ export function CLIWindow() {
       );
       break;
     default:
-      title = "Install the Pangolin CLI?";
+      title = "Install the Praxis CLI?";
       body = (
         <DialogMessage>
-          This downloads and installs the latest Pangolin CLI. The CLI lets you manage your connection with
+          This downloads and installs the latest Praxis CLI. The CLI lets you manage your connection with
           the <code className="font-mono text-[12px] text-mac-label">pangolin</code> command in a terminal.
         </DialogMessage>
       );

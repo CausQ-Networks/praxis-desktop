@@ -78,7 +78,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build Pangolin.exe
+      - name: Build Praxis.exe
         run: |
           make build VERSION="$VERSION"
           ls -la build
@@ -86,7 +86,7 @@ jobs:
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: windows-unsigned
-          path: build/Pangolin.exe
+          path: build/Praxis.exe
           if-no-files-found: error
           retention-days: 7
 
@@ -100,10 +100,10 @@ jobs:
         shell: pwsh
     env:
       VERSION: ${{ needs.check.outputs.version }}
-      EXE: build/Pangolin.exe
-      WXS: pangolin.wxs
-      PRODUCT_NAME: Pangolin
-      PRODUCT_URL: https://pangolin.net
+      EXE: build/Praxis.exe
+      WXS: praxis.wxs
+      PRODUCT_NAME: Praxis
+      PRODUCT_URL: https://praxis.net
       JSIGN_VERSION: "7.6"
       JSIGN_SHA256: 6cf58aa080e7ff82656f320cff8d4a3bff30408df8766806dcba3740dd839fa5
       WIX_VERSION: "5.0.2"
@@ -113,7 +113,7 @@ jobs:
       TSA_URL: http://timestamp.digicert.com
       SM_KEY_ALIAS: ${{ vars.SM_KEY_ALIAS || '8657e61d-c2bb-4603-8907-530e879e00bf' }}  # DigiCert ONE certificate ID (not the keypair alias)
     steps:
-      - name: Checkout tagged commit (for pangolin.wxs and icons)
+      - name: Checkout tagged commit (for praxis.wxs and icons)
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ env.TAG }}
@@ -167,7 +167,7 @@ jobs:
           [IO.File]::WriteAllBytes($p12, [Convert]::FromBase64String($env:SM_CLIENT_CERT_FILE_B64))
           "SM_CLIENT_CERT_FILE=$p12" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
-      - name: Sign Pangolin.exe
+      - name: Sign Praxis.exe
         env:
           SM_API_KEY: ${{ secrets.SM_API_KEY }}
           SM_CLIENT_CERT_PASSWORD: ${{ secrets.SM_CLIENT_CERT_PASSWORD }}
@@ -182,7 +182,7 @@ jobs:
         run: |
           # MSI ProductVersion must be numeric (X.Y.Z); drop any -rc.N suffix
           $msiVersion = $env:VERSION -replace '-.*$', ''
-          $msi = "build/pangolin-amd64-$env:VERSION.msi"
+          $msi = "build/praxis-amd64-$env:VERSION.msi"
           wix build -arch x64 -ext WixToolset.Util.wixext -d "Version=$msiVersion" -d BuildDir=build -d ProjectDir=. -o $msi $env:WXS
           if ($LASTEXITCODE -ne 0) { throw "wix build failed" }
           "MSI=$msi" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
@@ -245,7 +245,7 @@ jobs:
           UPDATE_SIGNING_KEY: ${{ secrets.UPDATE_SIGNING_KEY }}
         run: |
           set -eu
-          scripts/generate-manifest.sh "build/pangolin-amd64-${VERSION}.msi"
+          scripts/generate-manifest.sh "build/praxis-amd64-${VERSION}.msi"
           if [ -n "${UPDATE_SIGNING_KEY}" ]; then
             sudo apt-get install -y -qq signify-openbsd
             key="${RUNNER_TEMP}/release.sec"
@@ -265,6 +265,6 @@ jobs:
           prerelease: ${{ contains(env.TAG, '-rc.') }}
           fail_on_unmatched_files: false
           files: |
-            build/pangolin-amd64-*.msi
+            build/praxis-amd64-*.msi
             build/windows-latest.sig
             build/windows-filelist.txt

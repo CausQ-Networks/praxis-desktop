@@ -3,8 +3,8 @@ package secrets
 import (
 	"sync"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/managers/secretstore"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
 )
 
 var credentialMigrationOnce sync.Once

@@ -18,12 +18,12 @@ import (
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/sys/windows"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 )
 
-// A downloaded update is kept under %ProgramData%\Pangolin\updates so it survives
-// reboots and can be installed the next time Pangolin launches. The signed manifest
+// A downloaded update is kept under %ProgramData%\Praxis\updates so it survives
+// reboots and can be installed the next time Praxis launches. The signed manifest
 // it came from is kept beside it, and both are verified again before installing, so
 // a file planted or swapped in that directory is never installed.
 const (

@@ -1,8 +1,8 @@
 package managers
 
 import (
-	"github.com/fosrl/windows-linux/managers/secretstore"
-	"github.com/fosrl/windows-linux/secrets"
+	"github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
+	"github.com/CausQ-Networks/praxis-desktop/secrets"
 )
 
 type secretsIPCBridge struct{}

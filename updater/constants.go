@@ -6,7 +6,7 @@ var releasePublicKeyBase64 = "RWQWK7GF/RR35J1NETi57nk9cbngz7sBDsCrC3yce2CcKfACMp
 
 const (
 	// updateServerHost is the hostname of the update server
-	updateServerHost = "static.pangolin.net"
+	updateServerHost = "praxis.causq.com"
 	// updateServerPort is the port number for the update server
 	updateServerPort = 443
 	// updateServerUseHttps indicates whether to use HTTPS

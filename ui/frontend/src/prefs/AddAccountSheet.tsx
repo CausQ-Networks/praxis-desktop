@@ -7,7 +7,7 @@ import { report, urls, useEvent } from "../lib";
 // server, approve the code in the browser, done. Renewing an account skips the
 // server choice.
 
-const cloudHostname = "https://app.pangolin.net";
+const cloudHostname = "https://app.praxis.causq.com";
 // Steps cross-fade with a blur and the sheet eases to its new height, like the
 // macOS sheet's `.smooth(duration: 0.3)`.
 const stepMs = 300;
@@ -90,19 +90,19 @@ export function AddAccountSheet({ renewHostname, onClose }: { renewHostname: str
     case "server":
       content = (
         <div className="flex flex-col gap-4">
-          <Header title="Add Account" subtitle="Log in to Pangolin Cloud or to your own Pangolin server." />
+          <Header title="Add Account" subtitle="Log in to Praxis Cloud or to your own Praxis server." />
           <div role="radiogroup" aria-label="Server" className="flex flex-col gap-1">
             <Radio
               checked={server === "cloud"}
               onSelect={() => setServer("cloud")}
-              title="Pangolin Cloud"
-              detail="app.pangolin.net"
+              title="Praxis Cloud"
+              detail="app.praxis.causq.com"
             />
             <Radio
               checked={server === "selfHosted"}
               onSelect={() => setServer("selfHosted")}
               title="Self-hosted or dedicated"
-              detail="Your organization's Pangolin server"
+              detail="Your organization's Praxis server"
             />
           </div>
           {server === "selfHosted" && (
@@ -111,7 +111,7 @@ export function AddAccountSheet({ renewHostname, onClose }: { renewHostname: str
                 aria-label="Server URL"
                 autoFocus
                 className="w-full"
-                placeholder="https://pangolin.example.com"
+                placeholder="https://praxis.example.com"
                 value={serverURL}
                 onChange={(e) => setServerURL(e.target.value)}
               />

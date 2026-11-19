@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  MSI installer for Pangolin (WiX v4+ schema).
+  MSI installer for Praxis (WiX v4+ schema).
   Built in CI by the windows-sign job in .github/workflows/cicd.yml, or locally
   with scripts\build-msi.bat:
-    wix build -arch x64 -ext WixToolset.Util.wixext -d Version=X.Y.Z -d BuildDir=build -d ProjectDir=. -o build/pangolin-amd64-X.Y.Z.msi pangolin.wxs
+    wix build -arch x64 -ext WixToolset.Util.wixext -d Version=X.Y.Z -d BuildDir=build -d ProjectDir=. -o build/praxis-amd64-X.Y.Z.msi praxis.wxs
   Version must be numeric (X.Y.Z); drop any -rc.N suffix.
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Package Name="Pangolin" 
+  <Package Name="Praxis" 
            Language="1033" 
            Version="$(var.Version)" 
            Manufacturer="Fossorial" 
@@ -20,22 +20,22 @@
     <!-- Define the directory structure using StandardDirectory for WiX v4 -->
     <!-- Use ProgramFiles64Folder to ensure 64-bit Program Files directory -->
     <StandardDirectory Id="ProgramFiles64Folder">
-      <Directory Id="INSTALLFOLDER" Name="Pangolin">
-        <Component Id="PangolinExe" Guid="4FE37947-1773-42EB-8BDE-6B46CE0E8ECC">
-          <File Id="PangolinExe" 
-                Source="$(var.BuildDir)/Pangolin.exe" 
+      <Directory Id="INSTALLFOLDER" Name="Praxis">
+        <Component Id="PraxisExe" Guid="4FE37947-1773-42EB-8BDE-6B46CE0E8ECC">
+          <File Id="PraxisExe" 
+                Source="$(var.BuildDir)/Praxis.exe" 
                 KeyPath="yes" />
-          <ServiceInstall Id="PangolinManagerInstall"
-                          Name="PangolinManager"
-                          DisplayName="Pangolin Manager"
-                          Description="Pangolin Manager Service"
+          <ServiceInstall Id="PraxisManagerInstall"
+                          Name="PraxisManager"
+                          DisplayName="Praxis Manager"
+                          Description="Praxis Manager Service"
                           Type="ownProcess"
                           Start="auto"
                           ErrorControl="normal"
                           Arguments="/managerservice"
                           Vital="yes" />
-          <ServiceControl Id="PangolinManagerControl"
-                          Name="PangolinManager"
+          <ServiceControl Id="PraxisManagerControl"
+                          Name="PraxisManager"
                           Start="install"
                           Stop="both"
                           Remove="uninstall"
@@ -77,12 +77,12 @@
     <StandardDirectory Id="DesktopFolder">
       <Component Id="DesktopShortcut" Guid="A1B2C3D4-E5F6-4A5B-8C9D-0E1F2A3B4C5D">
         <Shortcut Id="DesktopShortcut"
-                  Name="Pangolin"
-                  Description="Pangolin Application"
-                  Target="[INSTALLFOLDER]Pangolin.exe"
+                  Name="Praxis"
+                  Description="Praxis Application"
+                  Target="[INSTALLFOLDER]Praxis.exe"
                   Icon="ProductIcon" />
         <RegistryValue Root="HKCU"
-                       Key="Software\Fossorial\Pangolin"
+                       Key="Software\Fossorial\Praxis"
                        Name="DesktopShortcut"
                        Type="integer"
                        Value="1"
@@ -92,16 +92,16 @@
 
     <!-- Start Menu shortcut -->
     <StandardDirectory Id="ProgramMenuFolder">
-      <Directory Id="ProgramMenuDir" Name="Pangolin">
+      <Directory Id="ProgramMenuDir" Name="Praxis">
         <Component Id="StartMenuShortcut" Guid="B2C3D4E5-F6A7-5B6C-9D0E-1F2A3B4C5D6E">
           <Shortcut Id="StartMenuShortcut"
-                    Name="Pangolin"
-                    Description="Pangolin Application"
-                    Target="[INSTALLFOLDER]Pangolin.exe"
+                    Name="Praxis"
+                    Description="Praxis Application"
+                    Target="[INSTALLFOLDER]Praxis.exe"
                     Icon="ProductIcon" />
           <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
           <RegistryValue Root="HKCU"
-                         Key="Software\Fossorial\Pangolin"
+                         Key="Software\Fossorial\Praxis"
                          Name="StartMenuShortcut"
                          Type="integer"
                          Value="1"
@@ -111,8 +111,8 @@
     </StandardDirectory>
 
     <!-- Feature required by WiX - all components must be referenced by a feature -->
-    <Feature Id="ProductFeature" Title="Pangolin" Level="1">
-      <ComponentRef Id="PangolinExe" />
+    <Feature Id="ProductFeature" Title="Praxis" Level="1">
+      <ComponentRef Id="PraxisExe" />
       <ComponentRef Id="WintunDll" />
       <ComponentRef Id="IconOrange" />
       <ComponentRef Id="IconGray" />
@@ -152,9 +152,9 @@
                   Impersonate="no"
                   Return="ignore" />
 
-    <!-- Remove runtime-registered PangolinManager before MSI-owned ServiceInstall (upgrade from legacy MSI). -->
+    <!-- Remove runtime-registered PraxisManager before MSI-owned ServiceInstall (upgrade from legacy MSI). -->
     <SetProperty Id="CleanupOrphanedManagerService"
-                 Value="&quot;[%ComSpec]&quot; /c &quot;[System64Folder]sc.exe&quot; stop PangolinManager &amp; &quot;[System64Folder]sc.exe&quot; delete PangolinManager"
+                 Value="&quot;[%ComSpec]&quot; /c &quot;[System64Folder]sc.exe&quot; stop PraxisManager &amp; &quot;[System64Folder]sc.exe&quot; delete PraxisManager"
                  Sequence="execute"
                  Before="CleanupOrphanedManagerService" />
     <CustomAction Id="CleanupOrphanedManagerService"

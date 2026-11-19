@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // Plasma's system tray reports SNI clicks in its own mix of coordinates

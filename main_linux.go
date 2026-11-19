@@ -7,42 +7,42 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/ui"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/ui"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
-const usage = `Usage: pangolin-client [--autostart]
-       pangolin-client --daemon
-       pangolin-client --tunnel <config.json>
+const usage = `Usage: praxis-client [--autostart]
+       praxis-client --daemon
+       praxis-client --tunnel <config.json>
 `
 
 // daemonUnavailableWarning is shown when the UI can't reach the daemon, with
 // the command to start the service under this system's init: systemd for the
 // packages, OpenRC or neither for the tar.gz's install.sh.
 func daemonUnavailableWarning() string {
-	start := "sudo systemctl enable --now pangolin-client"
+	start := "sudo systemctl enable --now praxis-client"
 	if _, err := os.Stat("/run/systemd/system"); err != nil {
-		if _, err := os.Stat("/etc/init.d/pangolin-client"); err == nil {
-			start = "sudo rc-update add pangolin-client default\nsudo rc-service pangolin-client start"
+		if _, err := os.Stat("/etc/init.d/praxis-client"); err == nil {
+			start = "sudo rc-update add praxis-client default\nsudo rc-service praxis-client start"
 		} else {
-			start = "sudo pangolin-client --daemon"
+			start = "sudo praxis-client --daemon"
 		}
 	}
-	return "The Pangolin background service isn't running, so Pangolin can't connect " +
+	return "The Praxis background service isn't running, so Praxis can't connect " +
 		"or remember your sign-in.\n\nStart it with:\n\n" + start
 }
 
 func main() {
 	setupLogging()
-	logger.Info("Pangolin version %s starting", version.Number)
+	logger.Info("Praxis version %s starting", version.Number)
 
 	args := os.Args[1:]
 	switch {
 	case len(args) == 1 && args[0] == "--daemon":
-		// Run by the pangolin-client systemd or OpenRC service.
+		// Run by the praxis-client systemd or OpenRC service.
 		if err := managers.Run(); err != nil {
 			logger.Fatal("Daemon failed: %v", err)
 		}
@@ -76,7 +76,7 @@ func main() {
 	reader, writer, events, err := managers.AttachUI()
 	switch {
 	case errors.Is(err, managers.ErrUIAlreadyRunning):
-		logger.Info("Pangolin is already running; asking it to show itself")
+		logger.Info("Praxis is already running; asking it to show itself")
 		managers.RequestUIAction(managers.UIActionShow)
 		return
 	case errors.Is(err, managers.ErrUpdateInstalling):
@@ -87,11 +87,11 @@ func main() {
 		}
 		return
 	case err != nil:
-		logger.Error("Failed to connect to the Pangolin daemon: %v", err)
+		logger.Error("Failed to connect to the Praxis daemon: %v", err)
 		warning = daemonUnavailableWarning()
 	default:
 		managers.InitializeIPCClient(reader, writer, events)
-		logger.Info("Connected to the Pangolin daemon")
+		logger.Info("Connected to the Praxis daemon")
 	}
 
 	if err := runUI(warning); err != nil {

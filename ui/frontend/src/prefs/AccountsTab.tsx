@@ -130,9 +130,9 @@ function WelcomeScreen({ active, onLogIn }: { active: boolean; onLogIn: () => vo
     <div className="flex min-h-0 flex-1 flex-col items-center p-8 text-center">
       <div className="flex-1" />
       <img src={appIcon} alt="" className="size-[96px]" />
-      <h2 className="mt-4 text-[22px] font-semibold">Log In to Pangolin</h2>
+      <h2 className="mt-4 text-[22px] font-semibold">Log In to Praxis</h2>
       <p className="mt-1.5 max-w-[340px] text-[13px] text-mac-secondary">
-        Connect to your organization's private resources by logging in to Pangolin Cloud or your own Pangolin server.
+        Connect to your organization's private resources by logging in to Praxis Cloud or your own Praxis server.
       </p>
       <Button variant="prominent" size="large" className="mt-6 min-w-[120px]" onClick={onLogIn}>
         Log In…

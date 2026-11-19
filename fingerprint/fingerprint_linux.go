@@ -13,13 +13,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/sys/unix"
 )
 
 // PostureChecks are the device posture checks reported on Linux. The field
-// names match fosrl/cli's Linux client, which the server already accepts.
+// names match causq-networks/praxis-cli's Linux client, which the server already accepts.
 type PostureChecks struct {
 	// Platform-agnostic checks
 
@@ -104,7 +104,7 @@ func serialCachePath() string {
 }
 
 // cpuFingerprint takes stable fields of the first CPU in /proc/cpuinfo, in the
-// same form as fosrl/cli's Linux client.
+// same form as causq-networks/praxis-cli's Linux client.
 func cpuFingerprint() string {
 	f, err := os.Open("/proc/cpuinfo")
 	if err != nil {
@@ -271,7 +271,7 @@ func blockDeviceEncrypted(dev string, depth int) bool {
 	return false
 }
 
-// firewallEnabled uses the same checks as fosrl/cli's Linux client: an active
+// firewallEnabled uses the same checks as causq-networks/praxis-cli's Linux client: an active
 // ufw or firewalld, or any nftables or iptables rules.
 func firewallEnabled() bool {
 	if out, ok := runCommand("ufw", "status"); ok && strings.Contains(strings.ToLower(out), "status: active") {

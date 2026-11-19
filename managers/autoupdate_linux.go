@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/sys/unix"
 )
 
@@ -26,7 +26,7 @@ func sessionAutoDownloadUpdates(uid uint32) (bool, error) {
 	return config.AutoDownloadUpdatesEnabledWithUserConfig(data), err
 }
 
-// readUserConfig reads uid's config file, ~/.config/pangolin-client/pangolin.json.
+// readUserConfig reads uid's config file, ~/.config/praxis-client/praxis.json.
 // The daemon runs as root and the user controls the file, so it must be a
 // regular file the user owns: a symlink, FIFO or device is refused.
 func readUserConfig(uid uint32) ([]byte, error) {

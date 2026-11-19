@@ -1,12 +1,12 @@
-module github.com/fosrl/windows-linux
+module github.com/CausQ-Networks/praxis-desktop
 
 go 1.26.0
 
 require (
 	git.sr.ht/~jackmordaunt/go-toast/v2 v2.0.3
 	github.com/Microsoft/go-winio v0.6.4
-	github.com/fosrl/newt v1.19.0
-	github.com/fosrl/olm v1.10.2
+	github.com/CausQ-Networks/praxis-newt v1.19.0
+	github.com/CausQ-Networks/praxis-olm v1.10.2
 	github.com/godbus/dbus/v5 v5.2.4
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
 	github.com/wailsapp/wails/v3 v3.0.0
@@ -44,5 +44,5 @@ require (
 )
 
 // Uncomment when developing dependencies.
-//replace github.com/fosrl/olm => ../olm
-//replace github.com/fosrl/newt => ../newt
+//replace github.com/CausQ-Networks/praxis-olm => ../olm
+//replace github.com/CausQ-Networks/praxis-newt => ../newt

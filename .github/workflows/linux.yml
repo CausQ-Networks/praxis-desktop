@@ -105,10 +105,10 @@ jobs:
         with:
           name: linux-${{ matrix.arch }}
           path: |
-            build/pangolin-client-*.deb
-            build/pangolin-client-*.rpm
-            build/pangolin-client-*.pkg.tar.zst
-            build/pangolin-client-*.tar.gz
+            build/praxis-client-*.deb
+            build/praxis-client-*.rpm
+            build/praxis-client-*.pkg.tar.zst
+            build/praxis-client-*.tar.gz
           if-no-files-found: error
 
   # ---------------------------------------------------------------------------
@@ -158,9 +158,9 @@ jobs:
           prerelease: ${{ contains(env.TAG, '-rc.') }}
           fail_on_unmatched_files: false
           files: |
-            build/pangolin-client-*.deb
-            build/pangolin-client-*.rpm
-            build/pangolin-client-*.pkg.tar.zst
-            build/pangolin-client-*.tar.gz
+            build/praxis-client-*.deb
+            build/praxis-client-*.rpm
+            build/praxis-client-*.pkg.tar.zst
+            build/praxis-client-*.tar.gz
             build/linux-latest.sig
             build/linux-filelist.txt

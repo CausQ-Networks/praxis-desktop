@@ -15,10 +15,10 @@ import (
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/sys/windows"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/elevate"
-	"github.com/fosrl/windows-linux/updater/winhttp"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/elevate"
+	"github.com/CausQ-Networks/praxis-desktop/updater/winhttp"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 func CheckForUpdate() (updateFound *UpdateFound, err error) {
@@ -376,7 +376,7 @@ func DownloadInBackground() (*StagedUpdate, error) {
 
 // InstallStagedInBackground installs the staged update using the calling process's
 // token (the manager service runs as SYSTEM). With session 0 it shows no UI at all;
-// otherwise the user in session is waiting for Pangolin to launch, so msiexec's
+// otherwise the user in session is waiting for Praxis to launch, so msiexec's
 // progress bar is shown on their desktop. Any UI relaunch is requested separately
 // with RelaunchUIAfterUpdate.
 func InstallStagedInBackground(session uint32) error {

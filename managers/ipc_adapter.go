@@ -1,6 +1,6 @@
 package managers
 
-import "github.com/fosrl/windows-linux/tunnel"
+import "github.com/CausQ-Networks/praxis-desktop/tunnel"
 
 // IPCAdapter implements tunnel.IPCClient interface to avoid circular dependencies
 type IPCAdapter struct{}

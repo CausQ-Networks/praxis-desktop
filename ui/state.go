@@ -7,13 +7,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/api"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/auth"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/tunnel"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/api"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 // Event names emitted to the frontend.

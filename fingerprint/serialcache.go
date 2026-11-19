@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // serialCacheFileName holds the last successfully-resolved hardware serial

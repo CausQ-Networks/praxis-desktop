@@ -1,0 +1,29 @@
+#!/sbin/openrc-run
+# OpenRC service for the Praxis client daemon, the counterpart of
+# praxis-client.service on systems without systemd (Gentoo, Alpine, Artix,
+# ...). The tar.gz release's install.sh installs it as
+# /etc/init.d/praxis-client and rewrites the binary path for its PREFIX.
+
+description="Praxis client background service"
+
+command=/usr/bin/praxis-client
+command_args="--daemon"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+# SIGTERM lets the daemon stop each tunnel cleanly so DNS and routes are
+# restored, as TimeoutStopSec does in the systemd unit.
+retry="TERM/45/KILL/5"
+
+depend() {
+	need net
+	use dns logger
+	after firewall
+}
+
+# The directories systemd creates from RuntimeDirectory, StateDirectory and
+# LogsDirectory.
+start_pre() {
+	checkpath -d -m 0755 -o root:root /run/praxis-client
+	checkpath -d -m 0700 -o root:root /var/lib/praxis-client
+	checkpath -d -m 0755 -o root:root /var/log/praxis-client
+}

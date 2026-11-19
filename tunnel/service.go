@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"sync"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 var (
@@ -33,7 +33,7 @@ func notifyStateChange(state State) {
 }
 
 // DefaultTunnelName is the name of the tunnel the UI starts. Its Windows
-// service is PangolinTunnel$olm.
+// service is PraxisTunnel$olm.
 const DefaultTunnelName = "olm"
 
 // State represents the state of a tunnel

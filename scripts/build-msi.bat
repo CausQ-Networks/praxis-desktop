@@ -1,5 +1,5 @@
 @echo off
-REM Build MSI installer for Pangolin
+REM Build MSI installer for Praxis
 REM This script creates the MSI installer from an already-built executable
 REM (make build VERSION=X.Y.Z).
 REM Usage: scripts\build-msi.bat X.Y.Z
@@ -23,4 +23,4 @@ if not exist ..\dll\MicrosoftEdgeWebview2Setup.exe (
     curl.exe -L -o ..\dll\MicrosoftEdgeWebview2Setup.exe https://go.microsoft.com/fwlink/p/?LinkId=2124703 || exit /b 1
 )
 
-wix.exe build -arch x64 -ext WixToolset.Util.wixext -define Version=%MSIVERSION% -define BuildDir=..\build -define ProjectDir=.. -o ..\build\pangolin-amd64-%VERSION%.msi ..\pangolin.wxs
+wix.exe build -arch x64 -ext WixToolset.Util.wixext -define Version=%MSIVERSION% -define BuildDir=..\build -define ProjectDir=.. -o ..\build\pangolin-amd64-%VERSION%.msi ..\praxis.wxs

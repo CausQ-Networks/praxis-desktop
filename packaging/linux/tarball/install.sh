@@ -1,5 +1,5 @@
 #!/bin/sh
-# Installs the Pangolin client from the release's tar.gz, for distributions
+# Installs the Praxis client from the release's tar.gz, for distributions
 # without a deb, rpm or Arch package (Gentoo, Void, Alpine, ...). Installs the
 # same files as the packages, plus an OpenRC service where systemd isn't the
 # init system, then starts the background service.
@@ -15,16 +15,16 @@
 #            Doesn't touch the running system.
 #
 # Installing also leaves a copy of this script as
-# $PREFIX/lib/pangolin-client/uninstall.sh, which removes everything again.
-# Saved sign-ins and logs stay; delete /var/lib/pangolin-client and
-# /var/log/pangolin-client too to remove them.
+# $PREFIX/lib/praxis-client/uninstall.sh, which removes everything again.
+# Saved sign-ins and logs stay; delete /var/lib/praxis-client and
+# /var/log/praxis-client too to remove them.
 
 set -eu
 
 PREFIX=${PREFIX:-/usr/local}
 DESTDIR=${DESTDIR:-}
-NAME=pangolin-client
-EXTENSION_UUID=pangolin@pangolin.net
+NAME=praxis-client
+EXTENSION_UUID=praxis@causq.com
 
 BIN=$PREFIX/bin/$NAME
 APPLICATIONS=$PREFIX/share/applications
@@ -32,7 +32,7 @@ ICON=$PREFIX/share/icons/hicolor/256x256/apps/$NAME.png
 EXTENSION_DIR=$PREFIX/share/gnome-shell/extensions/$EXTENSION_UUID
 LIB_DIR=$PREFIX/lib/$NAME
 AUTOSTART=/etc/xdg/autostart/$NAME-autostart.desktop
-POLKIT=/usr/share/polkit-1/actions/net.pangolin.client.policy
+POLKIT=/usr/share/polkit-1/actions/com.causq.praxis.client.policy
 SYSTEMD_UNIT=/etc/systemd/system/$NAME.service
 OPENRC_SCRIPT=/etc/init.d/$NAME
 
@@ -69,7 +69,7 @@ uninstall() {
     if [ -z "$DESTDIR" ] && [ -d /run/systemd/system ]; then
         systemctl daemon-reload >/dev/null 2>&1 || true
     fi
-    say "Pangolin was removed. Saved sign-ins and logs are still in /var/lib/$NAME and /var/log/$NAME."
+    say "Praxis was removed. Saved sign-ins and logs are still in /var/lib/$NAME and /var/log/$NAME."
 }
 
 install_files() {
@@ -86,7 +86,7 @@ install_files() {
     sed "$exec_sed" "$src/etc/xdg/autostart/$NAME-autostart.desktop" > "$DESTDIR$AUTOSTART"
     chmod 644 "$DESTDIR$APPLICATIONS/$NAME.desktop" "$DESTDIR$AUTOSTART"
     install -Dm644 "$src/share/icons/hicolor/256x256/apps/$NAME.png" "$DESTDIR$ICON"
-    install -Dm644 "$src/share/polkit-1/actions/net.pangolin.client.policy" "$DESTDIR$POLKIT"
+    install -Dm644 "$src/share/polkit-1/actions/com.causq.praxis.client.policy" "$DESTDIR$POLKIT"
     install -d "$DESTDIR$EXTENSION_DIR"
     install -m644 "$src/share/gnome-shell/extensions/$EXTENSION_UUID"/* "$DESTDIR$EXTENSION_DIR/"
 
@@ -158,7 +158,7 @@ main() {
     upgrade=0
     [ -e "$DESTDIR$BIN" ] && upgrade=1
     install_files "$init"
-    say "Installed Pangolin to $PREFIX (service: $init)."
+    say "Installed Praxis to $PREFIX (service: $init)."
     [ -n "$DESTDIR" ] && return
 
     # Not every desktop refreshes these caches by itself.
@@ -168,7 +168,7 @@ main() {
         update-desktop-database -q "$APPLICATIONS" 2>/dev/null || true
 
     start_service "$init" "$upgrade"
-    say "Open Pangolin from your applications menu. On GNOME, log out and back in, then run"
+    say "Open Praxis from your applications menu. On GNOME, log out and back in, then run"
     say "\"gnome-extensions enable $EXTENSION_UUID\" for the tray icon."
     say "To uninstall: sudo $LIB_DIR/uninstall.sh"
 }

@@ -6,11 +6,11 @@ import (
 	"os"
 	"sync"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/fingerprint"
-	"github.com/fosrl/windows-linux/updater"
-	"github.com/fosrl/windows-linux/managers/secretstore"
-	"github.com/fosrl/windows-linux/tunnel"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/fingerprint"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
+	"github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
 )
 
 // TunnelConfig is exported for use in UI
@@ -168,7 +168,7 @@ func InitializeIPCClient(reader, writer, events *os.File) {
 
 // errIPCNotConnected is returned when the UI has no connection to the manager,
 // for example when it was started on its own for development.
-var errIPCNotConnected = errors.New("not connected to the Pangolin manager service")
+var errIPCNotConnected = errors.New("not connected to the Praxis manager service")
 
 func rpcDecodeError() error {
 	var str string

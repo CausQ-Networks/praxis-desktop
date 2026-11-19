@@ -14,7 +14,7 @@ const (
 
 const peerConnectingTimeout = 10 * time.Second
 
-// exitNodeSiteID keys the synthetic "Pangolin Server" row alongside real (non-negative) site IDs.
+// exitNodeSiteID keys the synthetic "Praxis Server" row alongside real (non-negative) site IDs.
 const exitNodeSiteID = -1
 
 // StatusSite is one row of the Sites list in the Status tab.
@@ -24,7 +24,7 @@ type StatusSite struct {
 	Endpoint string `json:"endpoint"`
 	Status   string `json:"status"`
 	Color    string `json:"color"`
-	// Connection is "Local", "Relay" or "Direct"; empty for the Pangolin Server row.
+	// Connection is "Local", "Relay" or "Direct"; empty for the Praxis Server row.
 	Connection string `json:"connection"`
 	// LastSeen is an RFC 3339 time, or empty when unknown.
 	LastSeen string `json:"lastSeen"`
@@ -105,7 +105,7 @@ func (t *siteTracker) update(exitNode *peerInput, peers []peerInput, now time.Ti
 	if exitNode != nil {
 		p := *exitNode
 		p.ID = exitNodeSiteID
-		p.Name = "Pangolin Server"
+		p.Name = "Praxis Server"
 		incoming = append(incoming, p)
 	}
 	sorted := append([]peerInput(nil), peers...)

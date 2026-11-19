@@ -8,17 +8,17 @@ import (
 	"os"
 	"time"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"golang.org/x/sys/unix"
 )
 
 // ErrUIAlreadyRunning is returned by AttachUI when this user already has a UI.
-var ErrUIAlreadyRunning = errors.New("the Pangolin UI is already running")
+var ErrUIAlreadyRunning = errors.New("the Praxis UI is already running")
 
 // ErrUpdateInstalling is returned by AttachUI while the daemon installs an
 // update. The UI shows that it is updating, waits with WaitForUpdateInstall,
 // then starts again so the new version runs.
-var ErrUpdateInstalling = errors.New("Pangolin is installing an update")
+var ErrUpdateInstalling = errors.New("Praxis is installing an update")
 
 // currentSessionID identifies this UI to the daemon. Linux runs one UI per
 // user, so the UID plays the part of the Windows session ID.
@@ -103,7 +103,7 @@ func AttachUI() (reader, writer, events *os.File, err error) {
 func RequestUIAction(action UIAction) bool {
 	conn, err := dialDaemon()
 	if err != nil {
-		logger.Error("Failed to connect to the Pangolin daemon: %v", err)
+		logger.Error("Failed to connect to the Praxis daemon: %v", err)
 		return false
 	}
 	defer conn.Close()

@@ -7,7 +7,7 @@
 case "$1" in
     upgrade|failed-upgrade|1) exit 0 ;;
 esac
-systemctl disable --now pangolin-client.service >/dev/null 2>&1 || true
+systemctl disable --now praxis-client.service >/dev/null 2>&1 || true
 # Tells postinstall.sh that a later install is a reinstall, not an upgrade.
-mkdir -p -m 0700 /var/lib/pangolin-client && touch /var/lib/pangolin-client/.removed
+mkdir -p -m 0700 /var/lib/praxis-client && touch /var/lib/praxis-client/.removed
 exit 0

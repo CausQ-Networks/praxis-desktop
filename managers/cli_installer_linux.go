@@ -11,20 +11,20 @@ import (
 	"runtime"
 	"strconv"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // The daemon installs the CLI binary from the CLI's GitHub release into the
 // same place its install script (get-cli.sh) does.
 var cliInstallDir = "/usr/local/bin"
 
-const cliBinaryName = "pangolin"
+const cliBinaryName = "praxis"
 
 // cliInstallAction is the polkit action in
-// packaging/linux/net.pangolin.client.policy.
-const cliInstallAction = "net.pangolin.client.install-cli"
+// packaging/linux/com.causq.praxis.client.policy.
+const cliInstallAction = "com.causq.praxis.client.install-cli"
 
-// IsCLIInstalled reports whether the pangolin CLI is on PATH.
+// IsCLIInstalled reports whether the praxis CLI is on PATH.
 func IsCLIInstalled() bool {
 	_, err := exec.LookPath(cliBinaryName)
 	return err == nil
@@ -62,13 +62,13 @@ func cliAssetName() (string, error) {
 	case "arm":
 		arch = "arm32"
 	default:
-		return "", fmt.Errorf("the Pangolin CLI isn't available for %s", arch)
+		return "", fmt.Errorf("the Praxis CLI isn't available for %s", arch)
 	}
-	return "pangolin-cli_linux_" + arch, nil
+	return "praxis-cli_linux_" + arch, nil
 }
 
 // InstallCLI downloads the latest CLI release and installs it as
-// /usr/local/bin/pangolin. userToken must be non-zero: see authorizeCLIInstall.
+// /usr/local/bin/praxis. userToken must be non-zero: see authorizeCLIInstall.
 func InstallCLI(userToken uintptr) error {
 	if userToken == 0 {
 		return errors.New("installing the CLI needs an administrator")
@@ -85,7 +85,7 @@ func InstallCLI(userToken uintptr) error {
 	if err != nil {
 		return err
 	}
-	logger.Info("Installing Pangolin CLI %s from %s", release.TagName, url)
+	logger.Info("Installing Praxis CLI %s from %s", release.TagName, url)
 
 	if err := os.MkdirAll(cliInstallDir, 0o755); err != nil {
 		return err
@@ -115,7 +115,7 @@ func InstallCLI(userToken uintptr) error {
 	if err := os.Rename(tmpPath, target); err != nil {
 		return fmt.Errorf("failed to install %s: %w", target, err)
 	}
-	logger.Info("Installed Pangolin CLI %s at %s", release.TagName, target)
+	logger.Info("Installed Praxis CLI %s at %s", release.TagName, target)
 	return nil
 }
 

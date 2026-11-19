@@ -14,11 +14,11 @@ export function report(p: Promise<unknown>) {
 }
 
 export const urls = {
-  docs: "https://docs.pangolin.net/",
-  howItWorks: "https://docs.pangolin.net/about/how-pangolin-works",
-  terms: "https://pangolin.net/tos",
-  privacy: "https://pangolin.net/privacy",
-  configureClient: "https://docs.pangolin.net/manage/clients/platforms"
+  docs: "https://docs.praxis.causq.com/",
+  howItWorks: "https://docs.praxis.causq.com/about/how-pangolin-works",
+  terms: "https://praxis.net/tos",
+  privacy: "https://praxis.net/privacy",
+  configureClient: "https://docs.praxis.causq.com/manage/clients/platforms"
 };
 
 /** True in the Linux build (WebKitGTK), false on Windows (WebView2). */

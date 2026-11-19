@@ -65,7 +65,7 @@ var (
 func createTrayWindow() {
 	opts := application.WebviewWindowOptions{
 		Name:                       "tray",
-		Title:                      "Pangolin",
+		Title:                      "Praxis",
 		URL:                        "/#/tray",
 		Width:                      trayWindowWidth,
 		Height:                     trayHeight,
@@ -409,7 +409,7 @@ func showPreferencesWindow(tab int, login *LoginRequest) {
 	if prefsWindow == nil {
 		opts := application.WebviewWindowOptions{
 			Name:             "preferences",
-			Title:            "Pangolin Preferences",
+			Title:            "Praxis Preferences",
 			URL:              "/#/preferences",
 			Width:            720,
 			Height:           560,

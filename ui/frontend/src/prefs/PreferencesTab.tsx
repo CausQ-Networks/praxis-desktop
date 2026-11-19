@@ -88,7 +88,7 @@ export function PreferencesTab({ initial }: { initial: Settings }) {
         )}
 
         <Section header="General">
-          <Row title="Start at Login" description={`Starts Pangolin when you sign in${isLinux ? "" : " to Windows"}.`}>
+          <Row title="Start at Login" description={`Starts Praxis when you sign in${isLinux ? "" : " to Windows"}.`}>
             <Switch
               label="Start at Login"
               checked={form.openAtLogin}
@@ -99,7 +99,7 @@ export function PreferencesTab({ initial }: { initial: Settings }) {
           </Row>
           <Row
             title="Connect at Start"
-            description="Connects the tunnel whenever Pangolin starts. Also opens Pangolin at sign-in."
+            description="Connects the tunnel whenever Praxis starts. Also opens Praxis at sign-in."
           >
             <Switch
               label="Connect at Start"
@@ -116,7 +116,7 @@ export function PreferencesTab({ initial }: { initial: Settings }) {
             title="Automatically Download and Install Updates"
             description={
               form.autoDownloadUpdatesUnavailable ||
-              "Downloads updates in the background and installs them the next time Pangolin quits or starts."
+              "Downloads updates in the background and installs them the next time Praxis quits or starts."
             }
           >
             <Switch
@@ -131,7 +131,7 @@ export function PreferencesTab({ initial }: { initial: Settings }) {
         <Section header="DNS Settings">
           <Row
             title="Enable Aliases (DNS Override)"
-            description="When enabled, the client uses custom DNS servers to resolve internal resources and aliases. This overrides your system’s default DNS settings. Queries that cannot be resolved as a Pangolin resource will be forwarded to your configured Upstream DNS Server."
+            description="When enabled, the client uses custom DNS servers to resolve internal resources and aliases. This overrides your system’s default DNS settings. Queries that cannot be resolved as a Praxis resource will be forwarded to your configured Upstream DNS Server."
           >
             <Switch
               label="Enable Aliases (DNS Override)"
@@ -142,7 +142,7 @@ export function PreferencesTab({ initial }: { initial: Settings }) {
           </Row>
           <Row
             title="DNS Over Tunnel"
-            description="When enabled, DNS queries are routed through the tunnel for remote resolution. To ensure queries are tunneled correctly, you must define the DNS server as a Pangolin resource and enter its address as an Upstream DNS Server."
+            description="When enabled, DNS queries are routed through the tunnel for remote resolution. To ensure queries are tunneled correctly, you must define the DNS server as a Praxis resource and enter its address as an Upstream DNS Server."
           >
             <Switch
               label="DNS Over Tunnel"

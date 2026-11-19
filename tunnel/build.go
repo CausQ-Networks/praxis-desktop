@@ -6,11 +6,11 @@ import (
 	"errors"
 	"time"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 
-	olmpkg "github.com/fosrl/olm/olm"
-	configpkg "github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/version"
+	olmpkg "github.com/CausQ-Networks/praxis-olm/olm"
+	configpkg "github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 // tunnelService is one running tunnel: a Windows service on Windows, a child
@@ -34,7 +34,7 @@ func (s *tunnelService) buildTunnel(config Config) error {
 		EnableAPI:  true,
 		SocketPath: OLMSocketPath,
 		Version:    version.Number,
-		Agent:      "Pangolin " + version.OSDisplayName,
+		Agent:      "Praxis " + version.OSDisplayName,
 		OlmVersion: version.OlmVersionOverride,
 		OnConnected: func() {
 			logger.Info("Tunnel: OLM connected")

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/tunnel"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/services/notifications"
 )
@@ -83,14 +83,14 @@ func notifyUpdateAvailable(version string) {
 		showUpdateWindow()
 		return
 	}
-	body := "A new version of Pangolin is ready to install."
+	body := "A new version of Praxis is ready to install."
 	if version != "" {
-		body = fmt.Sprintf("Pangolin %s is ready to install.", version)
+		body = fmt.Sprintf("Praxis %s is ready to install.", version)
 	}
 	if manual, _ := updater.ManualUpdate(); manual != "" {
-		body = "A new version of Pangolin is available."
+		body = "A new version of Praxis is available."
 		if version != "" {
-			body = fmt.Sprintf("Pangolin %s is available.", version)
+			body = fmt.Sprintf("Praxis %s is available.", version)
 		}
 	}
 	if err := notifier.SendNotificationWithActions(notifications.NotificationOptions{

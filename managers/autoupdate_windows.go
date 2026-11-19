@@ -1,6 +1,6 @@
 package managers
 
-import "github.com/fosrl/windows-linux/config"
+import "github.com/CausQ-Networks/praxis-desktop/config"
 
 // sessionAutoDownloadUpdates reports whether the user logged into session has
 // automatic update downloads on. If their LOCALAPPDATA can't be found, only the

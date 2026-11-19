@@ -9,15 +9,15 @@ import (
 	"log/slog"
 	"runtime/debug"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/auth"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/icons"
-	"github.com/fosrl/windows-linux/api"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/secrets"
-	"github.com/fosrl/windows-linux/tunnel"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/icons"
+	"github.com/CausQ-Networks/praxis-desktop/api"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/secrets"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/events"
 	"github.com/wailsapp/wails/v3/pkg/services/notifications"
@@ -99,7 +99,7 @@ func Run(d Deps) error {
 func appOptions(assets fs.FS, services []application.Service) application.Options {
 	opts := application.Options{
 		Name:        config.AppName,
-		Description: "Pangolin client",
+		Description: "Praxis client",
 		Icon:        icons.Orange,
 		Services:    services,
 		Assets: application.AssetOptions{
@@ -119,7 +119,7 @@ func appOptions(assets fs.FS, services []application.Service) application.Option
 	return opts
 }
 
-// RunInstallingUpdate shows only the update window, saying that Pangolin is
+// RunInstallingUpdate shows only the update window, saying that Praxis is
 // being updated, and runs wait. It is for a UI that starts while the Linux
 // daemon installs an update: wait returns once the install is over, normally
 // by starting the new version in place of this process.
@@ -172,7 +172,7 @@ func onStarted() {
 	publish()
 }
 
-// newtLogHandler forwards Wails' slog output to the shared Pangolin log.
+// newtLogHandler forwards Wails' slog output to the shared Praxis log.
 type newtLogHandler struct {
 	attrs []slog.Attr
 }

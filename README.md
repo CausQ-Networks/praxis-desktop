@@ -1,17 +1,17 @@
-# [Pangolin](https://pangolin.net) Client for Windows and Linux
+# [Praxis](https://praxis.net) Client for Windows and Linux
 
-This is the official Pangolin client with GUI for Windows and Linux devices. 
+This is the official Praxis client with GUI for Windows and Linux devices. 
 
 This client can be used with both:
 
-- [Pangolin Cloud](https://app.pangolin.net/auth/signup) - Quickest and easiest way to get started using Pangolin.
-- [Self-hosted Pangolin](https://docs.pangolin.net/self-host/quick-install) - Fully self-hosted Community and Enterprise editions of Pangolin.
+- [Praxis Cloud](https://app.praxis.causq.com/auth/signup) - Quickest and easiest way to get started using Praxis.
+- [Self-hosted Praxis](https://docs.praxis.causq.com/self-host/quick-install) - Fully self-hosted Community and Enterprise editions of Praxis.
 
 ## Download & Install
 
-- [Pangolin for Windows Installer](https://pangolin.net/downloads/windows) - This is the official page to download the latest installer file for Windows.
-- [Pangolin for Linux Installer](https://pangolin.net/downloads/linux) - This is the official page to download the latest installer file for most Linux distros.
-- [All Versions](https://github.com/fosrl/windows-linux/releases) - The releases section of this repository contains release notes and download artifacts for the latest version and all older versions.
+- [Praxis for Windows Installer](https://praxis.net/downloads/windows) - This is the official page to download the latest installer file for Windows.
+- [Praxis for Linux Installer](https://praxis.net/downloads/linux) - This is the official page to download the latest installer file for most Linux distros.
+- [All Versions](https://github.com/CausQ-Networks/praxis-desktop/releases) - The releases section of this repository contains release notes and download artifacts for the latest version and all older versions.
 
 ## Compatibility
 
@@ -20,4 +20,4 @@ This client can be used with both:
 
 ## Documentation
 
-Documentation for the Windows and Linux client and all other documentation for Pangolin can be found at [docs.pangolin.net](https://docs.pangolin.net/manage/clients/platforms/windows).
+Documentation for the Windows and Linux client and all other documentation for Praxis can be found at [docs.praxis.causq.com](https://docs.praxis.causq.com/manage/clients/platforms/windows).

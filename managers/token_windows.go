@@ -1,7 +1,7 @@
 package managers
 
 import (
-	"github.com/fosrl/windows-linux/fingerprint"
+	"github.com/CausQ-Networks/praxis-desktop/fingerprint"
 	"golang.org/x/sys/windows"
 )
 

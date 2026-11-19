@@ -1,10 +1,10 @@
-// The Pangolin client's top bar button for GNOME Shell.
+// The Praxis client's top bar button for GNOME Shell.
 //
 // GNOME has no tray of its own, and the AppIndicator extension only opens an
-// app's popup on a double click. This button talks to the running Pangolin
-// client over D-Bus (net.pangolin.Client): a left click opens Pangolin's
+// app's popup on a double click. This button talks to the running Praxis
+// client over D-Bus (com.causq.praxis.Client): a left click opens Praxis's
 // popup beside it, a right click offers Quit. While this extension runs, it
-// owns net.pangolin.Client.ShellExtension so the client hides its regular
+// owns com.causq.praxis.Client.ShellExtension so the client hides its regular
 // tray icon. It also tells the client about clicks on the desktop
 // background, which don't move keyboard focus and so wouldn't close the
 // popup otherwise.
@@ -19,14 +19,14 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-const CLIENT_NAME = 'net.pangolin.Client';
-const CLIENT_PATH = '/net/pangolin/Client';
-const EXTENSION_NAME = 'net.pangolin.Client.ShellExtension';
-const CLIENT_WM_CLASS = 'pangolin-client';
+const CLIENT_NAME = 'com.causq.praxis.Client';
+const CLIENT_PATH = '/net/praxis/Client';
+const EXTENSION_NAME = 'com.causq.praxis.Client.ShellExtension';
+const CLIENT_WM_CLASS = 'praxis-client';
 
 const ClientProxy = Gio.DBusProxy.makeProxyWrapper(`
 <node>
-  <interface name="net.pangolin.Client1">
+  <interface name="com.causq.praxis.Client1">
     <method name="Activate">
       <arg type="i" direction="in" name="x"/>
       <arg type="i" direction="in" name="y"/>
@@ -41,7 +41,7 @@ const ClientProxy = Gio.DBusProxy.makeProxyWrapper(`
   </interface>
 </node>`);
 
-export default class PangolinExtension extends Extension {
+export default class PraxisExtension extends Extension {
     enable() {
         this._ownId = Gio.bus_own_name(Gio.BusType.SESSION, EXTENSION_NAME,
             Gio.BusNameOwnerFlags.NONE, null, null, null);
@@ -72,7 +72,7 @@ export default class PangolinExtension extends Extension {
             if (cancellable.is_cancelled())
                 return;
             if (error) {
-                console.error(`Pangolin: could not reach the client: ${error}`);
+                console.error(`Praxis: could not reach the client: ${error}`);
                 return;
             }
             this._proxy = proxy;
@@ -96,15 +96,15 @@ export default class PangolinExtension extends Extension {
     }
 
     _createButton() {
-        const button = new PanelMenu.Button(0.0, 'Pangolin', false);
+        const button = new PanelMenu.Button(0.0, 'Praxis', false);
         this._icon = new St.Icon({style_class: 'system-status-icon'});
         button.add_child(this._icon);
 
-        const quit = new PopupMenu.PopupMenuItem('Quit Pangolin');
+        const quit = new PopupMenu.PopupMenuItem('Quit Praxis');
         quit.connect('activate', () => this._proxy?.QuitAsync().catch(logError));
         button.menu.addMenuItem(quit);
 
-        // A left click opens Pangolin's own popup; a right click opens the
+        // A left click opens Praxis's own popup; a right click opens the
         // Quit menu. GNOME 49 and later handle clicks with a ClickGesture,
         // which is replaced; older versions handle them in vfunc_event,
         // which the event signal runs ahead of.
@@ -154,12 +154,12 @@ export default class PangolinExtension extends Extension {
         if (icon && icon.n_children() > 0)
             this._icon.gicon = Gio.BytesIcon.new(icon.get_data_as_bytes());
         const tooltip = this._proxy.get_cached_property('Tooltip')?.unpack() ?? '';
-        this._button.accessible_name = tooltip || 'Pangolin';
+        this._button.accessible_name = tooltip || 'Praxis';
         const visible = this._proxy.get_cached_property('PopupVisible')?.unpack() ?? false;
         this._watchClicks(visible);
     }
 
-    // While the popup is open, a press anywhere outside Pangolin's windows and
+    // While the popup is open, a press anywhere outside Praxis's windows and
     // outside this button closes it.
     _watchClicks(watch) {
         if (watch && !this._stageId) {
@@ -189,8 +189,8 @@ export default class PangolinExtension extends Extension {
     _insideClient(x, y) {
         return global.get_window_actors().some(actor => {
             const win = actor.meta_window;
-            // X11 reports the class as "Pangolin-client" and the instance as
-            // "pangolin-client".
+            // X11 reports the class as "Praxis-client" and the instance as
+            // "praxis-client".
             const wmClass = (win?.get_wm_class_instance?.() || win?.get_wm_class() || '').toLowerCase();
             if (!win || win.minimized || wmClass !== CLIENT_WM_CLASS)
                 return false;
@@ -202,5 +202,5 @@ export default class PangolinExtension extends Extension {
 
 function logError(e) {
     if (!(e instanceof GLib.Error && e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED)))
-        console.error(`Pangolin: ${e}`);
+        console.error(`Praxis: ${e}`);
 }

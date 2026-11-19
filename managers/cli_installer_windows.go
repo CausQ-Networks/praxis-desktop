@@ -9,12 +9,12 @@ import (
 	"syscall"
 )
 
-const cliInstallerAssetName = "pangolin-cli_windows_installer.msi"
+const cliInstallerAssetName = "praxis-cli_windows_installer.msi"
 
 func IsCLIInstalled() bool {
 	programFiles := os.Getenv("ProgramFiles")
 	if programFiles != "" {
-		defaultInstallPath := filepath.Join(programFiles, "pangolin-cli", "pangolin.exe")
+		defaultInstallPath := filepath.Join(programFiles, "praxis-cli", "pangolin.exe")
 		if _, err := os.Stat(defaultInstallPath); err == nil {
 			return true
 		}
@@ -44,7 +44,7 @@ func InstallCLI(userToken uintptr) error {
 		return err
 	}
 
-	tempDir, err := os.MkdirTemp("", "pangolin-cli-install-*")
+	tempDir, err := os.MkdirTemp("", "praxis-cli-install-*")
 	if err != nil {
 		return fmt.Errorf("failed to create temp dir: %w", err)
 	}

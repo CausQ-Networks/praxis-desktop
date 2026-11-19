@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/windows-linux/api"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/secrets"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-desktop/api"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/secrets"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // AuthError represents authentication-specific errors
@@ -193,7 +193,7 @@ func (am *AuthManager) LoginWithDeviceAuth(ctx context.Context, hostnameOverride
 	deviceName := config.GetFriendlyDeviceName()
 
 	// Start device auth
-	startResponse, err := loginClient.StartDeviceAuth("Pangolin "+version.OSDisplayName+" Client", &deviceName)
+	startResponse, err := loginClient.StartDeviceAuth("Praxis "+version.OSDisplayName+" Client", &deviceName)
 	if err != nil {
 		am.mu.Lock()
 		if apiErr, ok := err.(*api.APIError); ok {

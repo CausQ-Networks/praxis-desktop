@@ -6,14 +6,14 @@ import (
 	"os"
 )
 
-// Store persists Pangolin user secrets under ProgramData, encrypted with DPAPI as SYSTEM.
+// Store persists Praxis user secrets under ProgramData, encrypted with DPAPI as SYSTEM.
 type Store struct{}
 
 func NewStore() *Store {
 	return &Store{}
 }
 
-// Load returns secrets for the given Windows user SID and Pangolin user id.
+// Load returns secrets for the given Windows user SID and Praxis user id.
 // Missing files yield a zero-valued UserSecrets and no error.
 func (s *Store) Load(windowsSID, userID string) (UserSecrets, error) {
 	path, err := userSecretsPath(windowsSID, userID)

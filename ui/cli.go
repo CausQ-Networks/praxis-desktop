@@ -3,8 +3,8 @@ package ui
 import (
 	"sync"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/managers"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
 	"github.com/wailsapp/wails/v3/pkg/application"
 )
 
@@ -49,7 +49,7 @@ func showCLIWindow() {
 	}
 	if cliWindow == nil {
 		// Closing only hides the window, so a running install can be shown again.
-		cliWindow = newDialogWindow("cli", "Install Pangolin CLI", "cli", 200, hideCLIWindow)
+		cliWindow = newDialogWindow("cli", "Install Praxis CLI", "cli", 200, hideCLIWindow)
 	}
 	cliWindow.EmitEvent(eventCLIState, cliInfo)
 	cliWindow.Show()
@@ -86,14 +86,14 @@ func installCLI() {
 	}
 	cliMu.Unlock()
 
-	logger.Info("Starting Pangolin CLI installer via manager...")
+	logger.Info("Starting Praxis CLI installer via manager...")
 	setCLIInstallInProgress(true)
 	setCLIInfo(CLIInfo{Phase: cliPhaseInstalling})
 
 	err := managers.IPCClientInstallCLI()
 	setCLIInstallInProgress(false)
 	if err != nil {
-		logger.Error("Failed to install Pangolin CLI: %v", err)
+		logger.Error("Failed to install Praxis CLI: %v", err)
 		setCLIInfo(CLIInfo{Phase: cliPhaseError, Error: err.Error()})
 	} else {
 		setCLIInfo(CLIInfo{Phase: cliPhaseDone})

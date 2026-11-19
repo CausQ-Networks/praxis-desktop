@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/tunnel"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
 )
 
 // registerIPCCallbacks subscribes to manager and tunnel notifications.

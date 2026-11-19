@@ -9,7 +9,7 @@ import (
 )
 
 // UserDataDir is the per-user directory for config, accounts and caches:
-// %LOCALAPPDATA%\Pangolin, or %APPDATA%\Pangolin as a fallback.
+// %LOCALAPPDATA%\Praxis, or %APPDATA%\Praxis as a fallback.
 func UserDataDir() string {
 	appData := os.Getenv("LOCALAPPDATA")
 	if appData == "" {
@@ -35,7 +35,7 @@ func DaemonLogDir() string {
 	return GetLogDir()
 }
 
-// systemConfigPath is the machine-wide config file, %ProgramData%\Pangolin\pangolin.json.
+// systemConfigPath is the machine-wide config file, %ProgramData%\Praxis\pangolin.json.
 func systemConfigPath() string {
 	return filepath.Join(GetProgramDataDir(), ConfigFileName)
 }

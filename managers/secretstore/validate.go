@@ -9,7 +9,7 @@ import (
 
 const maxUserIDLen = 128
 
-// ValidateUserID ensures a Pangolin user id is safe to use as a file name component.
+// ValidateUserID ensures a Praxis user id is safe to use as a file name component.
 func ValidateUserID(userID string) error {
 	if userID == "" {
 		return errors.New("user id is empty")

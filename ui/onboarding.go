@@ -4,7 +4,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/events"
@@ -33,7 +33,7 @@ var (
 )
 
 // onboardingNeeded reports whether setup still has unfinished steps. Until it
-// is done, the tray offers "Open Pangolin Setup…" instead of connecting.
+// is done, the tray offers "Open Praxis Setup…" instead of connecting.
 func onboardingNeeded() bool {
 	if configManager == nil {
 		return false
@@ -60,7 +60,7 @@ func onboardingState(opened int) OnboardingState {
 	return s
 }
 
-// skipOnboardingForUsedInstall marks setup finished where Pangolin was used
+// skipOnboardingForUsedInstall marks setup finished where Praxis was used
 // before setup existed: there are accounts, a user config file, or the UI's
 // WebView2 data from an earlier launch. It only applies when setup has never
 // been shown, so someone who closed it partway still finishes it. Call it
@@ -78,7 +78,7 @@ func skipOnboardingForUsedInstall() {
 	if !usedBefore {
 		return
 	}
-	logger.Info("Pangolin was used on this computer before; skipping setup")
+	logger.Info("Praxis was used on this computer before; skipping setup")
 	configManager.SetOnboardingSeenWelcome(true)
 	configManager.SetOnboardingAcknowledgedPrivacy(true)
 }
@@ -117,7 +117,7 @@ func showOnboardingWindow() {
 	if onboardingWindow == nil {
 		opts := application.WebviewWindowOptions{
 			Name:                "onboarding",
-			Title:               "Pangolin Setup",
+			Title:               "Praxis Setup",
 			URL:                 "/#/onboarding",
 			Width:               560,
 			Height:              520,

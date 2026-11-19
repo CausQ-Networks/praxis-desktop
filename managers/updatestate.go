@@ -5,10 +5,10 @@ import (
 	"time"
 	_ "unsafe"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/services"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/services"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 )
 
 //go:linkname fastrandn runtime.fastrandn
@@ -21,7 +21,7 @@ const (
 	UpdateStateFoundUpdate
 	UpdateStateUpdatesDisabledUnofficialBuild
 	// UpdateStateUpdateDownloaded means the update was downloaded silently and will
-	// be installed the next time Pangolin quits or launches, for users with
+	// be installed the next time Praxis quits or launches, for users with
 	// autoDownloadUpdatesEnabled.
 	UpdateStateUpdateDownloaded
 	// UpdateStateInstallReminder means a downloaded update has waited long enough
@@ -103,7 +103,7 @@ func stageUpdate(version string) error {
 	updateLock.Lock()
 	stagedUpdate = staged
 	updateLock.Unlock()
-	logger.Info("Update %s downloaded; it will be installed the next time Pangolin quits or launches", staged.Version())
+	logger.Info("Update %s downloaded; it will be installed the next time Praxis quits or launches", staged.Version())
 	return nil
 }
 

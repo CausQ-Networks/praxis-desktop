@@ -27,7 +27,7 @@ func setPlatformOptions(opts *application.Options) {
 	}
 	opts.Linux = application.LinuxOptions{
 		DisableQuitOnLastWindowClosed: true,
-		ProgramName:                   "pangolin-client",
+		ProgramName:                   "praxis-client",
 	}
 }
 

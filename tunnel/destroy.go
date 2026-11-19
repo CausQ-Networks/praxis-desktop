@@ -1,7 +1,7 @@
 package tunnel
 
 import (
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // destroyTunnel performs cleanup and tears down the tunnel

@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/windows-linux/tunnel"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
 )
 
 var (

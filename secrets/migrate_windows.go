@@ -8,14 +8,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/managers/secretstore"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/managers/secretstore"
 	"github.com/zalando/go-keyring"
 )
 
 const (
-	legacyKeyringService = "Pangolin: pangolin-windows"
+	legacyKeyringService = "Praxis: pangolin-windows"
 	migrationFlagName    = "secrets-migrated.flag"
 )
 

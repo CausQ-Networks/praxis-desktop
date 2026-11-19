@@ -5,7 +5,7 @@ import (
 	"os/user"
 	"strconv"
 
-	"github.com/fosrl/windows-linux/fingerprint"
+	"github.com/CausQ-Networks/praxis-desktop/fingerprint"
 )
 
 // userToken is non-zero when the connected user may run admin actions such as

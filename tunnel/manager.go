@@ -12,11 +12,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/auth"
-	"github.com/fosrl/windows-linux/secrets"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
+	"github.com/CausQ-Networks/praxis-desktop/secrets"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // IPCClient provides an interface for IPC operations needed by the tunnel manager
@@ -276,7 +276,7 @@ func (tm *Manager) buildConfig() (Config, error) {
 		Endpoint:            activeAccount.Hostname,
 		//  DNS:                 "1.1.1.1", // this gets pulled dynamically from the host system now
 		OrgID:                   currentOrg.Id,
-		InterfaceName:           "Pangolin",
+		InterfaceName:           "Praxis",
 		UpstreamDNS:             upstreamDNS, // Each value has :53 appended
 		MatchDomains:            settings.MatchDomains,
 		OverrideDNS:             dnsOverride,

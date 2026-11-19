@@ -256,12 +256,12 @@ func buildMenuState(in menuInputs) MenuState {
 	var items []MenuItem
 
 	if in.HasUpdate {
-		items = append(items, item(menuIDUpdate, "Pangolin Update Available…", true), separator())
+		items = append(items, item(menuIDUpdate, "Praxis Update Available…", true), separator())
 	}
 
 	if in.Onboarding {
 		// Until setup is finished it is the only thing offered, as on macOS.
-		items = append(items, item(menuIDOpenSetup, "Open Pangolin Setup…", true))
+		items = append(items, item(menuIDOpenSetup, "Open Praxis Setup…", true))
 	} else {
 		showAuth := in.Authenticated && (!in.LoggedOut || in.SessionExpired) && !in.Initializing
 		if showAuth && in.ActiveAccountID != "" {
@@ -292,7 +292,7 @@ func buildMenuState(in menuInputs) MenuState {
 	items = append(items, item(menuIDPreferences, "Preferences…", true))
 	items = append(items, moreSubmenu(in))
 	items = append(items, separator())
-	items = append(items, item(menuIDQuit, "Quit Pangolin", true))
+	items = append(items, item(menuIDQuit, "Quit Praxis", true))
 
 	if wm := watermarkText(in); wm != "" {
 		items = append(items, separator(), label(wm, ""))
@@ -406,7 +406,7 @@ func siteDot(color string) string {
 func siteDetail(s StatusSite, now time.Time) []MenuItem {
 	status := detail("Status", s.Status)
 	status.Dot = siteDot(s.Color)
-	// Like the Status tab, the Pangolin Server row (no connection) has no exit node value.
+	// Like the Status tab, the Praxis Server row (no connection) has no exit node value.
 	exitNode := ""
 	if s.Connection != "" {
 		exitNode = "No"
@@ -563,7 +563,7 @@ func exitNodeSubmenu(in menuInputs) MenuItem {
 func moreSubmenu(in menuInputs) MenuItem {
 	sub := []MenuItem{
 		header("Support"),
-		item(menuIDHowItWorks, "How Pangolin Works", true),
+		item(menuIDHowItWorks, "How Praxis Works", true),
 		item(menuIDDocs, "Documentation", true),
 		separator(),
 		header(fmt.Sprintf("© %d Fossorial, Inc.", in.Year)),
@@ -576,7 +576,7 @@ func moreSubmenu(in menuInputs) MenuItem {
 		sub = append(sub, item(menuIDCheckUpdates, "Check for Updates…", true))
 	}
 	if !in.CLIInstalled {
-		text := "Install Pangolin CLI…"
+		text := "Install Praxis CLI…"
 		if in.CLIInstalling {
 			text = "Installing CLI…"
 		}

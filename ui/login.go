@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/managers"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
 )
 
-const cloudHostname = "https://app.pangolin.net"
+const cloudHostname = "https://app.praxis.causq.com"
 
 // Steps of the add-account sheet in Preferences > Accounts, as in the macOS
 // app's AddAccountSheet.

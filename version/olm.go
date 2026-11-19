@@ -1,6 +1,6 @@
 package version
 
-// OlmVersionOverride is the version of the github.com/fosrl/olm module this
+// OlmVersionOverride is the version of the github.com/CausQ-Networks/praxis-olm module this
 // binary was built against (with any "v" prefix stripped), as read from
 // go.mod by the build process.
 //

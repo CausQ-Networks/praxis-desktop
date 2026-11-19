@@ -15,9 +15,9 @@ import (
 	"unsafe"
 
 	"github.com/Microsoft/go-winio"
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/updater"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/updater"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/svc"
 )
@@ -36,7 +36,7 @@ func (service *managerService) Execute(args []string, r <-chan svc.ChangeRequest
 		changes <- svc.Status{State: svc.StopPending}
 	}()
 
-	logger.Info("Pangolin Manager service starting")
+	logger.Info("Praxis Manager service starting")
 
 	// WTSQueryUserToken requires SeTcbPrivilege (act as part of OS); enable it for this process.
 	// Without it, WTSQueryUserToken returns error 1314 on some systems even when running as LocalSystem.
@@ -262,7 +262,7 @@ func (service *managerService) Execute(args []string, r <-chan svc.ChangeRequest
 				if !stillAlive {
 					setUserAlwaysOn(clientWindowsSID, false)
 				}
-				// The user quit Pangolin (not a logoff or manager stop): install a
+				// The user quit Praxis (not a logoff or manager stop): install a
 				// silently downloaded update once no other session's UI is running.
 				if !stoppingManager && stillAlive {
 					procsLock.Lock()

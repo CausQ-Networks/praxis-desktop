@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"github.com/fosrl/windows-linux/api"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-desktop/api"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 )
 
 // UserDisplayName returns a display name for a user with precedence:

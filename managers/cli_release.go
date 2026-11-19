@@ -12,7 +12,7 @@ import (
 
 // The CLI install on each platform downloads an asset from the CLI's latest
 // GitHub release.
-const cliInstallerRepo = "fosrl/cli"
+const cliInstallerRepo = "causq-networks/praxis-cli"
 
 type githubReleaseAsset struct {
 	Name string `json:"name"`
@@ -25,7 +25,7 @@ type githubReleaseResponse struct {
 	Assets  []githubReleaseAsset `json:"assets"`
 }
 
-const cliInstallerUserAgent = "pangolin-client-cli-installer"
+const cliInstallerUserAgent = "praxis-client-cli-installer"
 
 func getLatestCLIRelease(repo string) (*githubReleaseResponse, error) {
 	repoParts := strings.Split(repo, "/")

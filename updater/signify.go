@@ -8,7 +8,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"golang.org/x/crypto/blake2b"
 )
 

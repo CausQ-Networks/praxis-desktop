@@ -3,7 +3,7 @@ package updater
 import (
 	"fmt"
 
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 const (

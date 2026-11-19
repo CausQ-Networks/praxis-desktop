@@ -11,7 +11,7 @@ import (
 )
 
 func dpapiDescription(windowsSID, userID string) string {
-	return fmt.Sprintf("Pangolin:%s:%s", windowsSID, userID)
+	return fmt.Sprintf("Praxis:%s:%s", windowsSID, userID)
 }
 
 func encrypt(plaintext []byte, windowsSID, userID string) ([]byte, error) {

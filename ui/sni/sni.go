@@ -39,7 +39,7 @@ type MenuItem struct {
 
 // Options configure a tray icon.
 type Options struct {
-	ID    string // stable application id, e.g. "pangolin-client"
+	ID    string // stable application id, e.g. "praxis-client"
 	Title string
 	// Activate is called on a primary click with the click position in X11
 	// screen coordinates, as the tray host reports it (0, 0 if unknown).

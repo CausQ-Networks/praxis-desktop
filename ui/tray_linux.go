@@ -6,16 +6,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/icons"
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/ui/sni"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/icons"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/ui/sni"
 	"github.com/wailsapp/wails/v3/pkg/application"
 	"github.com/wailsapp/wails/v3/pkg/events"
 )
 
 // On Linux the tray icon is a StatusNotifierItem (see package sni), or the
-// Pangolin GNOME Shell extension's panel button when that is running (see
+// Praxis GNOME Shell extension's panel button when that is running (see
 // shell_linux.go). Both report where they were clicked, and the popup opens
 // there.
 //
@@ -55,7 +55,7 @@ func startLinuxTray() {
 	startShellBridge()
 
 	item, err := sni.New(sni.Options{
-		ID:    "pangolin-client",
+		ID:    "praxis-client",
 		Title: config.AppName,
 		Activate: func(x, y int) {
 			logger.Debug("Tray: activate at %d,%d", x, y)
@@ -68,7 +68,7 @@ func startLinuxTray() {
 			setTrayClick(x/s, y/s, x != 0 || y != 0)
 			toggleTrayPopup()
 		},
-		Menu: []sni.MenuItem{{Label: "Quit Pangolin", OnClick: func() {
+		Menu: []sni.MenuItem{{Label: "Quit Praxis", OnClick: func() {
 			hideTrayPopup()
 			quit()
 		}}},
@@ -83,10 +83,10 @@ func startLinuxTray() {
 		updateTrayForState(currentTunnelState())
 	}
 
-	// Without a tray there is no way to open Pangolin, so open Preferences.
+	// Without a tray there is no way to open Praxis, so open Preferences.
 	time.Sleep(trayHostWait)
 	if !shellExtensionActive() && (item == nil || !item.HostAvailable()) {
-		logger.Error("No system tray found; opening Preferences instead. On GNOME, enable the Pangolin extension.")
+		logger.Error("No system tray found; opening Preferences instead. On GNOME, enable the Praxis extension.")
 		showPreferencesWindow(prefsTabPreferences, nil)
 	}
 }

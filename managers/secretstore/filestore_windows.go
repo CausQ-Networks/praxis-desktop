@@ -12,7 +12,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/sys/windows"
 )
 

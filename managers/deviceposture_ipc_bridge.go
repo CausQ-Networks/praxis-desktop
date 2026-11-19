@@ -3,7 +3,7 @@ package managers
 import (
 	"errors"
 
-	"github.com/fosrl/windows-linux/auth"
+	"github.com/CausQ-Networks/praxis-desktop/auth"
 )
 
 var errDevicePostureUnavailable = errors.New("platform fingerprint not available from manager")

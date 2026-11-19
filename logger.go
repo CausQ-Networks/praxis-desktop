@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 )
 
 // stringToLogLevel converts a string log level to logger.LogLevel.
@@ -67,7 +67,7 @@ func setupLogging() {
 	// Set the custom logger output
 	logInstance.SetOutput(file)
 
-	logger.Info("Pangolin logging initialized - log file: %s, log level: %s", logFile, logLevelStr)
+	logger.Info("Praxis logging initialized - log file: %s, log level: %s", logFile, logLevelStr)
 }
 
 // rotateLogFile handles daily log rotation

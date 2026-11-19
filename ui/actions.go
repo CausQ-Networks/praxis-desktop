@@ -4,17 +4,17 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/tunnel"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/tunnel"
 	"github.com/pkg/browser"
 )
 
 const (
-	urlHowItWorks = "https://docs.pangolin.net/about/how-pangolin-works"
-	urlDocs       = "https://docs.pangolin.net/"
-	urlTerms      = "https://pangolin.net/tos"
-	urlPrivacy    = "https://pangolin.net/privacy"
+	urlHowItWorks = "https://docs.praxis.causq.com/about/how-pangolin-works"
+	urlDocs       = "https://docs.praxis.causq.com/"
+	urlTerms      = "https://praxis.net/tos"
+	urlPrivacy    = "https://praxis.net/privacy"
 )
 
 func openURL(url string) {

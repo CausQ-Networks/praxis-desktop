@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 // APIError represents an error from the API client
@@ -65,7 +65,7 @@ func (e *APIError) Unwrap() error {
 	return e.Err
 }
 
-// APIClient handles HTTP requests to the Pangolin API
+// APIClient handles HTTP requests to the Praxis API
 type APIClient struct {
 	baseURL           string
 	sessionToken      string
@@ -130,7 +130,7 @@ func normalizeBaseURL(urlStr string) string {
 
 	// If empty, return default
 	if normalized == "" {
-		return "https://app.pangolin.net"
+		return "https://app.praxis.causq.com"
 	}
 
 	// Add https:// if no scheme

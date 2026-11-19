@@ -9,13 +9,13 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/elevate"
-	"github.com/fosrl/windows-linux/managers"
-	"github.com/fosrl/windows-linux/ui"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/elevate"
+	"github.com/CausQ-Networks/praxis-desktop/managers"
+	"github.com/CausQ-Networks/praxis-desktop/ui"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 
-	"github.com/fosrl/newt/logger"
+	"github.com/CausQ-Networks/praxis-newt/logger"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/mgr"
@@ -69,7 +69,7 @@ func main() {
 	setupLogging()
 
 	// Log version on startup
-	logger.Info("Pangolin version %s starting", version.Number)
+	logger.Info("Praxis version %s starting", version.Number)
 
 	// COM starts a new process to deliver a toast click (see ui.HandleToastActivation).
 	if ui.IsToastActivation(os.Args) {
@@ -189,8 +189,8 @@ func main() {
 			if managers.RequestUILaunchWithRetry(15 * time.Second) {
 				return
 			}
-			logger.Error("Could not start Pangolin. Please try again or contact your administrator.")
-			showMessageBox("Could not start Pangolin. Please try again or contact your administrator.", "Pangolin")
+			logger.Error("Could not start Praxis. Please try again or contact your administrator.")
+			showMessageBox("Could not start Praxis. Please try again or contact your administrator.", "Praxis")
 			return
 		}
 
@@ -245,8 +245,8 @@ func main() {
 
 	err := runUI("")
 	if errors.Is(err, ui.ErrWebView2Missing) {
-		showMessageBox("Pangolin needs the Microsoft Edge WebView2 Runtime, which is not installed.\n\n"+
-			"Download it from https://go.microsoft.com/fwlink/p/?LinkId=2124703 and then start Pangolin again.", config.AppName)
+		showMessageBox("Praxis needs the Microsoft Edge WebView2 Runtime, which is not installed.\n\n"+
+			"Download it from https://go.microsoft.com/fwlink/p/?LinkId=2124703 and then start Praxis again.", config.AppName)
 		os.Exit(1)
 	}
 	if err != nil {

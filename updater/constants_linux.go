@@ -10,9 +10,9 @@ const (
 	// latestVersionPath is the signed Linux manifest on the update server.
 	latestVersionPath = "/linux-client/latest.sig"
 	// packageFormatFile is written by each package (deb, rpm, Arch) to say how
-	// Pangolin was installed; see packaging/linux/nfpm.yaml. The AUR package
+	// Praxis was installed; see packaging/linux/nfpm.yaml. The AUR package
 	// replaces it with formatAUR.
-	packageFormatFile = "/usr/share/pangolin-client/package-format"
+	packageFormatFile = "/usr/share/praxis-client/package-format"
 )
 
 // Package formats, as written to packageFormatFile.
@@ -35,11 +35,11 @@ func packageFormat() string {
 }
 
 // candidatePattern returns the prefix and suffix around the version in the
-// names of update files for this machine: pangolin-client-<arch>-<version>
+// names of update files for this machine: praxis-client-<arch>-<version>
 // followed by .deb, .rpm or .pkg.tar.zst. AUR and hand-installed builds look
 // at the .deb entries only to learn the latest version.
 func candidatePattern() (prefix, suffix string) {
-	prefix = "pangolin-client-" + runtime.GOARCH + "-"
+	prefix = "praxis-client-" + runtime.GOARCH + "-"
 	switch packageFormat() {
 	case formatRPM:
 		return prefix, ".rpm"

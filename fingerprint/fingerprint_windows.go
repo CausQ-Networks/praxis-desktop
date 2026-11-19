@@ -16,8 +16,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/sys/windows"
 	"golang.org/x/sys/windows/registry"
 )

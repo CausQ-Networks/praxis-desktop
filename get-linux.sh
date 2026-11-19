@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Get Pangolin - Linux desktop client installation script
-# Usage: curl -fsSL https://static.pangolin.net/get-linux.sh | sh
+# Get Praxis - Linux desktop client installation script
+# Usage: curl -fsSL https://praxis.causq.com/get-linux.sh | sh
 #
 # Detects the distribution and CPU architecture, downloads the matching
 # package (deb, rpm or Arch) from the latest Linux release on GitHub and
@@ -24,7 +24,7 @@ NC='\033[0m' # No Color
 # with tags prefixed by platform (linux-0.1.0, windows-0.16.0).
 REPO="fosrl/windows-linux"
 TAG_PREFIX="linux-"
-VERSIONS_API_URL="https://api.fossorial.io/api/v1/versions"
+VERSIONS_API_URL="https://api.github.com/repos/CausQ-Networks/praxis-cli/api/v1/versions"
 
 # Output helpers
 print_status() {
@@ -188,7 +188,7 @@ install_tarball() {
     sudo_cmd="$2"
 
     if ldd --version 2>&1 | grep -qi musl; then
-        print_warning "This system uses musl; Pangolin needs glibc 2.35 or newer and may not start."
+        print_warning "This system uses musl; Praxis needs glibc 2.35 or newer and may not start."
     fi
 
     dir=$(dirname "$file")
@@ -204,7 +204,7 @@ install_tarball() {
     libs=$( (ldconfig -p || /sbin/ldconfig -p) 2>/dev/null || true)
     if [ -n "$libs" ] && ! printf '%s' "$libs" | grep -q 'libwebkit2gtk-4\.1\.so'; then
         print_warning "WebKitGTK 4.1 was not found. Install it with your package manager"
-        print_warning "(Gentoo: net-libs/webkit-gtk:4.1, Void: libwebkit2gtk41) before opening Pangolin."
+        print_warning "(Gentoo: net-libs/webkit-gtk:4.1, Void: libwebkit2gtk41) before opening Praxis."
     fi
 }
 
@@ -232,11 +232,11 @@ main() {
     parse_args "$@"
 
     if [ "$(uname -s)" != "Linux" ]; then
-        print_error "This script installs the Linux client. For other platforms see https://pangolin.net/downloads"
+        print_error "This script installs the Linux client. For other platforms see https://praxis.net/downloads"
         exit 1
     fi
 
-    print_status "Installing the Pangolin client for Linux..."
+    print_status "Installing the Praxis client for Linux..."
 
     ARCH=$(detect_arch)
     if [ -z "$FORMAT" ]; then
@@ -258,7 +258,7 @@ main() {
 
     SUDO_CMD=$(get_sudo_cmd)
 
-    asset_name="pangolin-client-${ARCH}-${VERSION}.${EXTENSION}"
+    asset_name="praxis-client-${ARCH}-${VERSION}.${EXTENSION}"
     download_url="https://github.com/${REPO}/releases/download/${TAG_PREFIX}${VERSION}/${asset_name}"
 
     # Readable by everyone so apt's unprivileged _apt user can open the file
@@ -281,12 +281,12 @@ main() {
     fi
     install_package "$FORMAT" "$package_file" "$SUDO_CMD"
 
-    if command -v pangolin-client >/dev/null 2>&1 || [ -x /usr/bin/pangolin-client ] ||
-        [ -x /usr/local/bin/pangolin-client ]; then
-        print_status "Pangolin ${VERSION} installed successfully!"
-        print_status "Open Pangolin from your applications menu, then log in from the tray icon."
+    if command -v praxis-client >/dev/null 2>&1 || [ -x /usr/bin/praxis-client ] ||
+        [ -x /usr/local/bin/praxis-client ]; then
+        print_status "Praxis ${VERSION} installed successfully!"
+        print_status "Open Praxis from your applications menu, then log in from the tray icon."
     else
-        print_error "Installation failed: pangolin-client was not found after installing."
+        print_error "Installation failed: praxis-client was not found after installing."
         exit 1
     fi
 }

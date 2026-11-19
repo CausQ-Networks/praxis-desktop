@@ -44,12 +44,12 @@ export function UpdateWindow() {
       break;
     case "upToDate":
       title = "You’re up to date";
-      body = <Message>Pangolin {info.currentVersion} is the latest version.</Message>;
+      body = <Message>Praxis {info.currentVersion} is the latest version.</Message>;
       buttons = ok;
       break;
     case "disabled":
       title = "Updates are disabled";
-      body = <Message>Updates are disabled for unofficial builds of Pangolin.</Message>;
+      body = <Message>Updates are disabled for unofficial builds of Praxis.</Message>;
       buttons = ok;
       break;
     case "checkFailed":
@@ -66,7 +66,7 @@ export function UpdateWindow() {
       break;
     case "downloading": {
       const known = info.bytesTotal > 0;
-      title = info.version ? `Updating to Pangolin ${info.version}` : "Updating Pangolin";
+      title = info.version ? `Updating to Praxis ${info.version}` : "Updating Praxis";
       body = (
         <div className="mt-3 flex flex-col gap-1.5">
           <ProgressBar value={known ? info.bytesDownloaded / info.bytesTotal : undefined} />
@@ -96,32 +96,32 @@ export function UpdateWindow() {
       );
       break;
     case "installing":
-      // Linux: Pangolin started while the background service installs a
+      // Linux: Praxis started while the background service installs a
       // downloaded update; the new version opens when it is done.
-      title = "Updating Pangolin…";
+      title = "Updating Praxis…";
       body = (
         <>
           <div className="mt-2">
             <Spinner />
           </div>
-          <Message>Pangolin will open when the update is installed.</Message>
+          <Message>Praxis will open when the update is installed.</Message>
         </>
       );
       buttons = <Button onClick={close}>Hide</Button>;
       break;
     case "complete":
       title = "Installing update…";
-      body = <Message>Pangolin will restart automatically when the installation finishes.</Message>;
+      body = <Message>Praxis will restart automatically when the installation finishes.</Message>;
       buttons = <Button onClick={close}>Close</Button>;
       break;
     default:
-      title = "A new version of Pangolin is available";
+      title = "A new version of Praxis is available";
       if (info.manual) {
         // This install can't update itself (Linux AUR or a hand-installed build).
         body = (
           <>
             <Message>
-              {info.version ? `Pangolin ${info.version} is available — you have ${info.currentVersion}. ` : ""}
+              {info.version ? `Praxis ${info.version} is available — you have ${info.currentVersion}. ` : ""}
               {info.manual}
             </Message>
             {info.manualCommand && <CopyableCommand command={info.manualCommand} />}
@@ -133,7 +133,7 @@ export function UpdateWindow() {
       body = (
         <Message>
           {info.version
-            ? `Pangolin ${info.version} is available — you have ${info.currentVersion}.`
+            ? `Praxis ${info.version} is available — you have ${info.currentVersion}.`
             : `You have ${info.currentVersion}.`}{" "}
           Would you like to install it now? Your connection will be interrupted briefly while the update installs.
         </Message>

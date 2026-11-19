@@ -9,12 +9,12 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/fosrl/windows-linux/config"
+	"github.com/CausQ-Networks/praxis-desktop/config"
 	"golang.org/x/sys/unix"
 )
 
 // On Linux the daemon keeps each user's secrets in root-only files:
-// /var/lib/pangolin-client/credentials/<uid>/<user id>.secrets.json. There is
+// /var/lib/praxis-client/credentials/<uid>/<user id>.secrets.json. There is
 // no DPAPI equivalent for a system service, so as with NetworkManager's
 // system connections, the protection is that only root can read them.
 

@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fosrl/windows-linux/config"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-desktop/config"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 )
 
 // Login authenticates a user with email and password

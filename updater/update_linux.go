@@ -15,8 +15,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/fosrl/newt/logger"
-	"github.com/fosrl/windows-linux/version"
+	"github.com/CausQ-Networks/praxis-newt/logger"
+	"github.com/CausQ-Networks/praxis-desktop/version"
 	"golang.org/x/crypto/blake2b"
 )
 
@@ -29,7 +29,7 @@ import (
 //
 // Every download is staged first (see staged_linux.go), as on Windows: with
 // automatic downloads on, the daemon stages updates in the background and
-// installs them when Pangolin quits or launches, or when the daemon starts.
+// installs them when Praxis quits or launches, or when the daemon starts.
 
 const (
 	maxManifestSize = 512 * 1024
@@ -109,11 +109,11 @@ func ManualUpdate() (instructions, command string) {
 	case formatDeb, formatRPM, formatArch:
 		return "", ""
 	case formatAUR:
-		return "Pangolin was installed from the AUR. Update the pangolin-client-bin package with your AUR helper, for example:",
-			"yay -Syu pangolin-client-bin"
+		return "Praxis was installed from the AUR. Update the praxis-client-bin package with your AUR helper, for example:",
+			"yay -Syu praxis-client-bin"
 	default:
-		return "This copy of Pangolin wasn't installed from a package. Download the new version from:",
-			"https://github.com/fosrl/windows-linux/releases?q=linux-&expanded=true"
+		return "This copy of Praxis wasn't installed from a package. Download the new version from:",
+			"https://github.com/CausQ-Networks/praxis-desktop/releases?q=linux-&expanded=true"
 	}
 }
 
@@ -132,7 +132,7 @@ var updateInProgress atomic.Bool
 // downloaded in the background is installed instead of downloading again.
 // userToken is non-zero when the requesting user may install updates; a
 // staged update may be installed by anyone, as it would be when they quit
-// Pangolin. Progress, and any error, arrive on the returned channel.
+// Praxis. Progress, and any error, arrive on the returned channel.
 func DownloadVerifyAndExecute(userToken uintptr, useStaged bool) chan DownloadProgress {
 	progress := make(chan DownloadProgress, 128)
 	progress <- DownloadProgress{Activity: "Initializing"}
@@ -316,10 +316,10 @@ func install(path string) error {
 	if packageFormat() == formatArch {
 		waitForPacmanLock()
 	}
-	unit := "pangolin-client-update-" + strconv.FormatInt(time.Now().Unix(), 10)
+	unit := "praxis-client-update-" + strconv.FormatInt(time.Now().Unix(), 10)
 	args := append([]string{
 		"--unit=" + unit, "--collect", "--wait", "--quiet",
-		"--description=Pangolin client update",
+		"--description=Praxis client update",
 		"--setenv=DEBIAN_FRONTEND=noninteractive",
 		// zypper otherwise gives up at once if another zypper holds its lock.
 		"--setenv=ZYPP_LOCK_TIMEOUT=" + strconv.Itoa(int(packageLockTimeout/time.Second)),
@@ -381,5 +381,5 @@ func installCommand(path string) ([]string, error) {
 		// LocalFileSigLevel; its hash was checked against the signed manifest.
 		return []string{"pacman", "-U", "--noconfirm", path}, nil
 	}
-	return nil, errors.New("this copy of Pangolin can't install updates itself")
+	return nil, errors.New("this copy of Praxis can't install updates itself")
 }
