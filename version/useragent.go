@@ -17,6 +17,6 @@ func Arch() string {
 }
 
 func UserAgent() string {
-	// pangolin-windows-<version> on Windows, pangolin-linux-<version> on Linux.
-	return fmt.Sprintf("pangolin-%s-%s", runtime.GOOS, Number)
+	// praxis-windows-<version> on Windows, praxis-linux-<version> on Linux.
+	return fmt.Sprintf("praxis-%s-%s", runtime.GOOS, Number)
 }

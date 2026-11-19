@@ -5,7 +5,7 @@ package ui
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
-static int pangolinMessageBox(void *parent, int type, int buttons, int defaultYes,
+static int praxisMessageBox(void *parent, int type, int buttons, int defaultYes,
 		const char *title, const char *message) {
 	GtkWidget *d = gtk_message_dialog_new(parent ? GTK_WINDOW(parent) : NULL,
 		parent ? GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT : 0,
@@ -50,7 +50,7 @@ func messageBox(owner application.Window, title, message string, msgType, button
 		if owner != nil {
 			parent = owner.NativeWindow()
 		}
-		result = C.pangolinMessageBox(parent, msgType, buttons, def, cTitle, cMessage)
+		result = C.praxisMessageBox(parent, msgType, buttons, def, cTitle, cMessage)
 	})
 	return result
 }

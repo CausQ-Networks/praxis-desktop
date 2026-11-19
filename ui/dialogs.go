@@ -61,7 +61,7 @@ func notify(title, message string) {
 		logger.Info("%s: %s", title, message)
 		return
 	}
-	id := fmt.Sprintf("pangolin-%d", notificationN.Add(1))
+	id := fmt.Sprintf("praxis-%d", notificationN.Add(1))
 	if err := notifier.SendNotification(notifications.NotificationOptions{
 		ID:    id,
 		Title: title,
@@ -72,7 +72,7 @@ func notify(title, message string) {
 }
 
 const (
-	updateNotificationCategory = "pangolin-update"
+	updateNotificationCategory = "praxis-update"
 	updateNotificationOpen     = "open"
 )
 
@@ -94,7 +94,7 @@ func notifyUpdateAvailable(version string) {
 		}
 	}
 	if err := notifier.SendNotificationWithActions(notifications.NotificationOptions{
-		ID:         "pangolin-update",
+		ID:         "praxis-update",
 		Title:      "Update Available",
 		Body:       body,
 		CategoryID: updateNotificationCategory,

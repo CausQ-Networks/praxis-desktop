@@ -15,7 +15,7 @@ export function report(p: Promise<unknown>) {
 
 export const urls = {
   docs: "https://docs.praxis.causq.com/",
-  howItWorks: "https://docs.praxis.causq.com/about/how-pangolin-works",
+  howItWorks: "https://docs.praxis.causq.com/about/how-praxis-works",
   terms: "https://praxis.net/tos",
   privacy: "https://praxis.net/privacy",
   configureClient: "https://docs.praxis.causq.com/manage/clients/platforms"

@@ -9,7 +9,7 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-const cliSecretsPipePath = `\\.\pipe\pangolin-manager-cli-secrets`
+const cliSecretsPipePath = `\\.\pipe\praxis-manager-cli-secrets`
 
 var (
 	modKernel32                     = windows.NewLazySystemDLL("kernel32.dll")

@@ -14,13 +14,13 @@ const cliInstallerAssetName = "praxis-cli_windows_installer.msi"
 func IsCLIInstalled() bool {
 	programFiles := os.Getenv("ProgramFiles")
 	if programFiles != "" {
-		defaultInstallPath := filepath.Join(programFiles, "praxis-cli", "pangolin.exe")
+		defaultInstallPath := filepath.Join(programFiles, "praxis-cli", "praxis.exe")
 		if _, err := os.Stat(defaultInstallPath); err == nil {
 			return true
 		}
 	}
 
-	_, err := exec.LookPath("pangolin.exe")
+	_, err := exec.LookPath("praxis.exe")
 	return err == nil
 }
 

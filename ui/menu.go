@@ -566,7 +566,7 @@ func moreSubmenu(in menuInputs) MenuItem {
 		item(menuIDHowItWorks, "How Praxis Works", true),
 		item(menuIDDocs, "Documentation", true),
 		separator(),
-		header(fmt.Sprintf("© %d Fossorial, Inc.", in.Year)),
+		header(fmt.Sprintf("© %d CausQ, Inc.", in.Year)),
 		item(menuIDTerms, "Terms of Service", true),
 		item(menuIDPrivacy, "Privacy Policy", true),
 		separator(),

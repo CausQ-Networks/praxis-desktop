@@ -35,7 +35,7 @@ func DaemonLogDir() string {
 	return GetLogDir()
 }
 
-// systemConfigPath is the machine-wide config file, %ProgramData%\Praxis\pangolin.json.
+// systemConfigPath is the machine-wide config file, %ProgramData%\Praxis\praxis.json.
 func systemConfigPath() string {
 	return filepath.Join(GetProgramDataDir(), ConfigFileName)
 }

@@ -18,7 +18,7 @@ const (
 )
 
 // settingsScopeOrg is the Update scope that saves a change to the current org's
-// section of pangolin.json; anything else saves to the global settings.
+// section of praxis.json; anything else saves to the global settings.
 const settingsScopeOrg = "org"
 
 // Settings is the Preferences tab form. The tunnel settings are what the

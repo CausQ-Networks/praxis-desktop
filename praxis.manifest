@@ -3,9 +3,9 @@
     <assemblyIdentity 
         version="1.0.0.0" 
         processorArchitecture="*" 
-        name="Pangolin" 
+        name="Praxis" 
         type="win32"/>
-    <description>Pangolin</description>
+    <description>Praxis</description>
     <dependency>
         <dependentAssembly>
             <assemblyIdentity 

@@ -76,14 +76,14 @@ for MSI_FILE in ${MSI_FILES}; do
     FILENAME=$(basename "${MSI_FILE}")
     
     # Build download location from template
-    # Extract version from filename (e.g., "pangolin-amd64-1.0.31.msi" -> "1.0.31")
-    # This assumes the format: pangolin-<arch>-<version>.msi
-    VERSION=$(echo "${FILENAME}" | sed -E 's/^pangolin-[^-]+-(.+)\.msi$/\1/')
+    # Extract version from filename (e.g., "praxis-amd64-1.0.31.msi" -> "1.0.31")
+    # This assumes the format: praxis-<arch>-<version>.msi
+    VERSION=$(echo "${FILENAME}" | sed -E 's/^praxis-[^-]+-(.+)\.msi$/\1/')
     
     # Verify version extraction worked
     if [ "${VERSION}" = "${FILENAME}" ]; then
         echo "Error: Could not extract version from filename: ${FILENAME}"
-        echo "  Expected format: pangolin-<arch>-<version>.msi"
+        echo "  Expected format: praxis-<arch>-<version>.msi"
         exit 1
     fi
     

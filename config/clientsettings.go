@@ -30,7 +30,7 @@ func (s *ClientSettings) ManagesUpstreamDNS() bool {
 	return s != nil && (s.PrimaryDNS != "" || s.SecondaryDNS != "")
 }
 
-// OrgConfig is the "orgs" section of pangolin.json: the settings of Config that
+// OrgConfig is the "orgs" section of praxis.json: the settings of Config that
 // can be set per org, plus ExitNodeResourceID. An exit node only means something
 // within one org, so it has no global equivalent.
 type OrgConfig struct {
@@ -99,8 +99,8 @@ type TunnelSettings struct {
 }
 
 // EffectiveSettings resolves the settings for an org. Precedence: what the
-// server manages, then the org's section of pangolin.json, then the global
-// settings of pangolin.json.
+// server manages, then the org's section of praxis.json, then the global
+// settings of praxis.json.
 func (cm *ConfigManager) EffectiveSettings(orgID string, server *ClientSettings) TunnelSettings {
 	settings := TunnelSettings{
 		DNSOverride:             cm.GetDNSOverride(),
@@ -169,7 +169,7 @@ func (cm *ConfigManager) EffectiveSettings(orgID string, server *ClientSettings)
 
 // EffectiveExitNode picks the exit node to use for an org: one the server locks
 // always wins; next the user's own selection (savedResourceID), then the org's
-// section of pangolin.json, and last the server's default.
+// section of praxis.json, and last the server's default.
 func EffectiveExitNode(server *ClientSettings, savedResourceID int, org OrgConfig) int {
 	if locked := server.LockedExitNode(); locked != 0 {
 		return locked
@@ -186,7 +186,7 @@ func EffectiveExitNode(server *ClientSettings, savedResourceID int, org OrgConfi
 	return 0
 }
 
-// GetOrgConfig returns the org's section of pangolin.json, or an empty one.
+// GetOrgConfig returns the org's section of praxis.json, or an empty one.
 func (cm *ConfigManager) GetOrgConfig(orgID string) OrgConfig {
 	cm.mu.RLock()
 	defer cm.mu.RUnlock()
@@ -198,7 +198,7 @@ func (cm *ConfigManager) GetOrgConfig(orgID string) OrgConfig {
 }
 
 // UpdateOrgConfig overlays the fields set in changes onto the org's section of
-// pangolin.json.
+// praxis.json.
 func (cm *ConfigManager) UpdateOrgConfig(orgID string, changes OrgConfig) bool {
 	cm.mu.Lock()
 	defer cm.mu.Unlock()
@@ -211,7 +211,7 @@ func (cm *ConfigManager) UpdateOrgConfig(orgID string, changes OrgConfig) bool {
 	return cm.save(cfg)
 }
 
-// ResetOrgConfig removes the org's section of pangolin.json, so it uses the
+// ResetOrgConfig removes the org's section of praxis.json, so it uses the
 // global settings again.
 func (cm *ConfigManager) ResetOrgConfig(orgID string) bool {
 	cm.mu.Lock()

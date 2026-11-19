@@ -36,7 +36,7 @@ export function CLIWindow() {
       title = "Praxis CLI installed";
       body = (
         <DialogMessage>
-          The CLI was added to your PATH. Open a new terminal to use the <code className="font-mono text-[12px] text-mac-label">pangolin</code>{" "}
+          The CLI was added to your PATH. Open a new terminal to use the <code className="font-mono text-[12px] text-mac-label">praxis</code>{" "}
           command.
         </DialogMessage>
       );
@@ -63,7 +63,7 @@ export function CLIWindow() {
       body = (
         <DialogMessage>
           This downloads and installs the latest Praxis CLI. The CLI lets you manage your connection with
-          the <code className="font-mono text-[12px] text-mac-label">pangolin</code> command in a terminal.
+          the <code className="font-mono text-[12px] text-mac-label">praxis</code> command in a terminal.
         </DialogMessage>
       );
       buttons = (

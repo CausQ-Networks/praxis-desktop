@@ -39,12 +39,12 @@ func checkForUpdate(keepSession bool) (*UpdateFound, *winhttp.Session, *winhttp.
 	logger.Debug("Updater: Current version: %s, Architecture: %s", version.Number, version.Arch())
 
 	// // Allow bypassing official version check for development/testing
-	// // Set PANGOLIN_ALLOW_DEV_UPDATES=1 to enable updates on unsigned builds
+	// // Set PRAXIS_ALLOW_DEV_UPDATES=1 to enable updates on unsigned builds
 	// isOfficial := version.IsRunningOfficialVersion()
 	// logger.Info("Updater: IsRunningOfficialVersion: %v", isOfficial)
 	// if !isOfficial {
-	// 	devMode := os.Getenv("PANGOLIN_ALLOW_DEV_UPDATES") == "1"
-	// 	logger.Info("Updater: PANGOLIN_ALLOW_DEV_UPDATES: %v", devMode)
+	// 	devMode := os.Getenv("PRAXIS_ALLOW_DEV_UPDATES") == "1"
+	// 	logger.Info("Updater: PRAXIS_ALLOW_DEV_UPDATES: %v", devMode)
 	// 	if !devMode {
 	// 		err := errors.New("Build is not official, so updates are disabled")
 	// 		logger.Error("Updater: %v", err)
@@ -305,7 +305,7 @@ func downloadAndVerify(progress chan DownloadProgress) (*StagedUpdate, error) {
 	logger.Debug("Updater: Hash verification passed")
 
 	// // Skip authenticode verification in development mode
-	// devMode := os.Getenv("PANGOLIN_ALLOW_DEV_UPDATES") == "1"
+	// devMode := os.Getenv("PRAXIS_ALLOW_DEV_UPDATES") == "1"
 	// if !devMode {
 	// 	logger.Info("Updater: Verifying Authenticode signature")
 	// 	send(DownloadProgress{Activity: "Verifying authenticode signature"})

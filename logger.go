@@ -49,7 +49,7 @@ func setupLogging() {
 		return
 	}
 
-	logFile := filepath.Join(logDir, "pangolin.log")
+	logFile := filepath.Join(logDir, "praxis.log")
 
 	// Rotate log file if needed
 	err = rotateLogFile(logDir, logFile)
@@ -91,7 +91,7 @@ func rotateLogFile(logDir string, logFile string) error {
 	}
 
 	// Create rotated filename with date
-	rotatedName := fmt.Sprintf("pangolin-%s.log", fileTime.Format("2006-01-02"))
+	rotatedName := fmt.Sprintf("praxis-%s.log", fileTime.Format("2006-01-02"))
 	rotatedPath := filepath.Join(logDir, rotatedName)
 
 	// Rename current log file to dated filename
@@ -113,7 +113,7 @@ func cleanupOldLogFiles(logDir string, daysToKeep int) {
 	}
 
 	for _, file := range files {
-		if !file.IsDir() && strings.HasPrefix(file.Name(), "pangolin-") && strings.HasSuffix(file.Name(), ".log") {
+		if !file.IsDir() && strings.HasPrefix(file.Name(), "praxis-") && strings.HasSuffix(file.Name(), ".log") {
 			filePath := filepath.Join(logDir, file.Name())
 			info, err := file.Info()
 			if err != nil {

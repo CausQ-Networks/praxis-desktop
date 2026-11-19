@@ -49,7 +49,7 @@ var (
 // logFilePath is the log the Logs tab shows: the one the manager service and
 // tunnels write, where connection problems show up.
 func logFilePath() string {
-	return filepath.Join(config.DaemonLogDir(), "pangolin.log")
+	return filepath.Join(config.DaemonLogDir(), "praxis.log")
 }
 
 func toLogEntry(it logEntryItem) LogEntry {
@@ -250,7 +250,7 @@ func copyLogLines(seqs []uint64) {
 func exportLogs() {
 	owner := preferencesWindowOrNil()
 	d := app.Dialog.SaveFile().
-		SetFilename(fmt.Sprintf("pangolin-log-%s.txt", time.Now().Format("2006-01-02T150405"))).
+		SetFilename(fmt.Sprintf("praxis-log-%s.txt", time.Now().Format("2006-01-02T150405"))).
 		SetMessage("Export log to file").
 		AddFilter("Text Files (*.txt)", "*.txt").
 		AddFilter("All Files (*.*)", "*.*")

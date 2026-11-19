@@ -2,6 +2,6 @@
   "uuid": "praxis@causq.com",
   "name": "Praxis",
   "description": "Shows the Praxis client in the top bar. Click it to open Praxis's menu.",
-  "url": "https://github.com/fosrl/windows",
+  "url": "https://github.com/CausQ-Networks/praxis-desktop",
   "shell-version": ["45", "46", "47", "48", "49", "50", "51"]
 }

@@ -19,7 +19,7 @@ import (
 
 // Toast clicks are delivered through COM. The UI usually runs elevated, and
 // COM won't hand a click from the (non-elevated) shell to an elevated
-// process, so Windows starts a new pangolin.exe with -Embedding instead. That
+// process, so Windows starts a new praxis.exe with -Embedding instead. That
 // process receives the click here and forwards it to the running UI through
 // the manager service.
 

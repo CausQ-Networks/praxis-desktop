@@ -22,7 +22,7 @@ NC='\033[0m' # No Color
 
 # GitHub repository info. Windows and Linux are released from the same repo,
 # with tags prefixed by platform (linux-0.1.0, windows-0.16.0).
-REPO="fosrl/windows-linux"
+REPO="CausQ-Networks/praxis-desktop"
 TAG_PREFIX="linux-"
 VERSIONS_API_URL="https://api.github.com/repos/CausQ-Networks/praxis-cli/api/v1/versions"
 
@@ -60,7 +60,7 @@ download() {
     fi
 }
 
-# Latest Linux client version from the Fossorial versions API
+# Latest Linux client version from the CausQ versions API
 # (data.linux.latestVersion), without any "linux-" or "v" prefix.
 get_latest_version() {
     latest_info=$(fetch "$VERSIONS_API_URL" 2>/dev/null || true)

@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	officialCommonName = "Fossorial"
+	officialCommonName = "CausQ"
 )
 
 // IsRunningOfficialVersion checks if the current executable is signed with the official certificate.

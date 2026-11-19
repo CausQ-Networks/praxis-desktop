@@ -22,7 +22,7 @@ func (l LogLine) String() string {
 }
 
 var (
-	// LEVEL: YYYY/MM/DD HH:MM:SS message (pangolin format)
+	// LEVEL: YYYY/MM/DD HH:MM:SS message (praxis format)
 	logPraxisRe = regexp.MustCompile(`^(\w+):\s+(\d{4}/\d{2}/\d{2}\s+\d{2}:\d{2}:\d{2})\s+(.+)$`)
 	// [2006-01-02 15:04:05.000] [LEVEL] message
 	logBracketRe = regexp.MustCompile(`^\[([^\]]+)\]\s+\[([^\]]+)\]\s+(.+)$`)

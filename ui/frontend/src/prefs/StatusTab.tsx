@@ -15,7 +15,7 @@ const empty: StatusView = {
   json: '{\n  "connected": false\n}',
 };
 
-const modeKey = "pangolin.statusDisplayMode";
+const modeKey = "praxis.statusDisplayMode";
 
 function savedMode(): "formatted" | "json" {
   try {

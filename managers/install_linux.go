@@ -50,7 +50,7 @@ func InstallTunnel(configJSON string) error {
 	}
 	name := tunnelConfig.Name
 	if name == "" {
-		name = "pangolin-tunnel"
+		name = "praxis-tunnel"
 	}
 	if err := UninstallTunnel(name); err != nil {
 		return fmt.Errorf("failed to stop running tunnel: %w", err)

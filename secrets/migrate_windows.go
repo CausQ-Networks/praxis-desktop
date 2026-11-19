@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	legacyKeyringService = "Praxis: pangolin-windows"
+	legacyKeyringService = "Praxis: praxis-windows"
 	migrationFlagName    = "secrets-migrated.flag"
 )
 

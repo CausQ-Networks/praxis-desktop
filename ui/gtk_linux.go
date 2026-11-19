@@ -5,17 +5,17 @@ package ui
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
-static double pangolinScreenResolution(void) {
+static double praxisScreenResolution(void) {
 	GdkScreen *s = gdk_screen_get_default();
 	return s ? gdk_screen_get_resolution(s) : -1;
 }
 
-static int pangolinIsComposited(void) {
+static int praxisIsComposited(void) {
 	GdkScreen *s = gdk_screen_get_default();
 	return s ? gdk_screen_is_composited(s) : 1;
 }
 
-static void pangolinRootSize(int *w, int *h) {
+static void praxisRootSize(int *w, int *h) {
 	GdkScreen *s = gdk_screen_get_default();
 	G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 	*w = s ? gdk_screen_get_width(s) : 0;
@@ -23,18 +23,18 @@ static void pangolinRootSize(int *w, int *h) {
 	G_GNUC_END_IGNORE_DEPRECATIONS
 }
 
-static int pangolinWindowScale(void) {
+static int praxisWindowScale(void) {
 	GdkScreen *s = gdk_screen_get_default();
 	GdkWindow *root = s ? gdk_screen_get_root_window(s) : NULL;
 	return root ? gdk_window_get_scale_factor(root) : 1;
 }
 
-static int pangolinIsX11(void) {
+static int praxisIsX11(void) {
 	GdkDisplay *d = gdk_display_get_default();
 	return d && GDK_IS_X11_DISPLAY(d);
 }
 
-static void pangolinPopupHints(void *w) {
+static void praxisPopupHints(void *w) {
 	GtkWindow *win = GTK_WINDOW(w);
 	gtk_window_set_skip_taskbar_hint(win, TRUE);
 	gtk_window_set_skip_pager_hint(win, TRUE);
@@ -46,7 +46,7 @@ static void pangolinPopupHints(void *w) {
 
 // Present with a fresh X server timestamp: window managers (Mutter in
 // particular) refuse focus to a window presented without a recent one.
-static void pangolinPresentNow(void *w) {
+static void praxisPresentNow(void *w) {
 	GtkWindow *win = GTK_WINDOW(w);
 	GdkWindow *gw = gtk_widget_get_window(GTK_WIDGET(win));
 	guint32 t = GDK_CURRENT_TIME;
@@ -56,7 +56,7 @@ static void pangolinPresentNow(void *w) {
 	gtk_window_present_with_time(win, t);
 }
 
-static int pangolinPointer(int *x, int *y) {
+static int praxisPointer(int *x, int *y) {
 	GdkDisplay *d = gdk_display_get_default();
 	if (!d) return 0;
 	GdkSeat *seat = gdk_display_get_default_seat(d);
@@ -67,12 +67,12 @@ static int pangolinPointer(int *x, int *y) {
 	return 1;
 }
 
-static int pangolinMonitorCount(void) {
+static int praxisMonitorCount(void) {
 	GdkDisplay *d = gdk_display_get_default();
 	return d ? gdk_display_get_n_monitors(d) : 0;
 }
 
-static int pangolinMonitor(int i, GdkRectangle *geo, GdkRectangle *work, int *primary) {
+static int praxisMonitor(int i, GdkRectangle *geo, GdkRectangle *work, int *primary) {
 	GdkDisplay *d = gdk_display_get_default();
 	GdkMonitor *m = d ? gdk_display_get_monitor(d, i) : NULL;
 	if (!m) return 0;
@@ -82,7 +82,7 @@ static int pangolinMonitor(int i, GdkRectangle *geo, GdkRectangle *work, int *pr
 	return 1;
 }
 
-static void pangolinPreferDark(int dark) {
+static void praxisPreferDark(int dark) {
 	GtkSettings *s = gtk_settings_get_default();
 	if (s) g_object_set(s, "gtk-application-prefer-dark-theme", dark ? TRUE : FALSE, NULL);
 }
@@ -110,7 +110,7 @@ func uiScale() float64 {
 		return v
 	}
 	var dpi float64
-	application.InvokeSync(func() { dpi = float64(C.pangolinScreenResolution()) })
+	application.InvokeSync(func() { dpi = float64(C.praxisScreenResolution()) })
 	if dpi <= 0 {
 		return 1
 	}
@@ -123,7 +123,7 @@ func uiScale() float64 {
 // windows in units of this many X pixels.
 func gtkScale() int {
 	var s C.int
-	application.InvokeSync(func() { s = C.pangolinWindowScale() })
+	application.InvokeSync(func() { s = C.praxisWindowScale() })
 	if s < 1 {
 		return 1
 	}
@@ -132,20 +132,20 @@ func gtkScale() int {
 
 func screenComposited() bool {
 	var c C.int
-	application.InvokeSync(func() { c = C.pangolinIsComposited() })
+	application.InvokeSync(func() { c = C.praxisIsComposited() })
 	return c != 0
 }
 
 // rootWindowSize is the size of the whole X screen in GTK units.
 func rootWindowSize() (int, int) {
 	var w, h C.int
-	application.InvokeSync(func() { C.pangolinRootSize(&w, &h) })
+	application.InvokeSync(func() { C.praxisRootSize(&w, &h) })
 	return int(w), int(h)
 }
 
 func runningOnX11() bool {
 	var x C.int
-	application.InvokeSync(func() { x = C.pangolinIsX11() })
+	application.InvokeSync(func() { x = C.praxisIsX11() })
 	return x != 0
 }
 
@@ -153,7 +153,7 @@ func runningOnX11() bool {
 // it is only current while the pointer is over an X window.
 func pointerPosition() (int, int, bool) {
 	var x, y, ok C.int
-	application.InvokeSync(func() { ok = C.pangolinPointer(&x, &y) })
+	application.InvokeSync(func() { ok = C.praxisPointer(&x, &y) })
 	return int(x), int(y), ok != 0
 }
 
@@ -171,11 +171,11 @@ type monitor struct {
 func monitors() []monitor {
 	var list []monitor
 	application.InvokeSync(func() {
-		n := int(C.pangolinMonitorCount())
+		n := int(C.praxisMonitorCount())
 		for i := 0; i < n; i++ {
 			var geo, work C.GdkRectangle
 			var primary C.int
-			if C.pangolinMonitor(C.int(i), &geo, &work, &primary) == 0 {
+			if C.praxisMonitor(C.int(i), &geo, &work, &primary) == 0 {
 				continue
 			}
 			m := monitor{
@@ -196,7 +196,7 @@ func monitors() []monitor {
 func setPopupHints(w application.Window) {
 	application.InvokeSync(func() {
 		if native := w.NativeWindow(); native != nil {
-			C.pangolinPopupHints(native)
+			C.praxisPopupHints(native)
 		}
 	})
 }
@@ -204,7 +204,7 @@ func setPopupHints(w application.Window) {
 func presentNow(w application.Window) {
 	application.InvokeSync(func() {
 		if native := w.NativeWindow(); native != nil {
-			C.pangolinPresentNow(native)
+			C.praxisPresentNow(native)
 		}
 	})
 }
@@ -214,5 +214,5 @@ func setPreferDark(dark bool) {
 	if dark {
 		d = 1
 	}
-	application.InvokeAsync(func() { C.pangolinPreferDark(d) })
+	application.InvokeAsync(func() { C.praxisPreferDark(d) })
 }

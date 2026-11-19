@@ -8,7 +8,7 @@ import (
 )
 
 // OLMSocketPath is the named pipe OLM serves its API on.
-const OLMSocketPath = `\\.\pipe\pangolin-olm`
+const OLMSocketPath = `\\.\pipe\praxis-olm`
 
 func dialOLM(ctx context.Context) (net.Conn, error) {
 	return winio.DialPipe(OLMSocketPath, nil)

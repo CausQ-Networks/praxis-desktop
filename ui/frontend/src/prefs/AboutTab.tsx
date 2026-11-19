@@ -16,7 +16,7 @@ export function AboutTab() {
           <Value>{info.version}</Value>
         </Row>
         <Row title="Copyright">
-          <Value>© {info.year} Fossorial, Inc.</Value>
+          <Value>© {info.year} CausQ, Inc.</Value>
         </Row>
       </Section>
 

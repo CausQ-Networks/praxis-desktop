@@ -15,7 +15,7 @@ import (
 const (
 	AppName                             = "Praxis"
 	DefaultHostname                     = "https://app.praxis.causq.com"
-	ConfigFileName                      = "pangolin.json"
+	ConfigFileName                      = "praxis.json"
 	LogLevel                            = "info"
 	DefaultDNSOverride                  = true
 	DefaultDNSTunnel                    = false
@@ -28,7 +28,7 @@ const (
 )
 
 // Config represents the per-user application configuration stored under
-// %LOCALAPPDATA%\Praxis\pangolin.json (or %APPDATA% as a fallback).
+// %LOCALAPPDATA%\Praxis\praxis.json (or %APPDATA% as a fallback).
 type Config struct {
 	DNSOverride                  *bool    `json:"dnsOverride,omitempty"`
 	DNSTunnel                    *bool    `json:"dnsTunnel,omitempty"`
@@ -59,7 +59,7 @@ type Config struct {
 }
 
 // SystemConfig represents machine-wide configuration stored under
-// %ProgramData%\Praxis\pangolin.json. It supports the same settings as
+// %ProgramData%\Praxis\praxis.json. It supports the same settings as
 // per-user config plus system-only fields like log level.
 type SystemConfig struct {
 	Config
@@ -75,11 +75,11 @@ type ConfigManager struct {
 
 // NewConfigManager creates a new ConfigManager instance
 func NewConfigManager() *ConfigManager {
-	pangolinDir := UserDataDir()
-	configPath := filepath.Join(pangolinDir, ConfigFileName)
+	praxisDir := UserDataDir()
+	configPath := filepath.Join(praxisDir, ConfigFileName)
 
 	// Create directory if it doesn't exist
-	if err := os.MkdirAll(pangolinDir, 0o755); err != nil {
+	if err := os.MkdirAll(praxisDir, 0o755); err != nil {
 		logger.Error("Failed to create config directory: %v", err)
 	}
 

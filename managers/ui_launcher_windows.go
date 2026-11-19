@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	uiLaunchPipePath = `\\.\pipe\pangolin-manager-ui-launch`
-	uiActionPipePath = `\\.\pipe\pangolin-manager-ui-action`
+	uiLaunchPipePath = `\\.\pipe\praxis-manager-ui-launch`
+	uiActionPipePath = `\\.\pipe\praxis-manager-ui-action`
 )
 
 // currentSessionID returns the Windows session of this process, or 0 if unknown.

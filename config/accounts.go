@@ -48,8 +48,8 @@ func (s OrgSettings) IsEmpty() bool {
 }
 
 func NewAccountManager() *AccountManager {
-	pangolinDir := UserDataDir()
-	accountsPath := filepath.Join(pangolinDir, AccountsFileName)
+	praxisDir := UserDataDir()
+	accountsPath := filepath.Join(praxisDir, AccountsFileName)
 
 	mgr := &AccountManager{
 		path:     accountsPath,
@@ -57,7 +57,7 @@ func NewAccountManager() *AccountManager {
 	}
 
 	// Create directory if it doesn't exist
-	if err := os.MkdirAll(pangolinDir, 0o755); err != nil {
+	if err := os.MkdirAll(praxisDir, 0o755); err != nil {
 		logger.Error("Failed to create config directory: %v", err)
 	}
 

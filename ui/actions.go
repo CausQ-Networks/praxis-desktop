@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	urlHowItWorks = "https://docs.praxis.causq.com/about/how-pangolin-works"
+	urlHowItWorks = "https://docs.praxis.causq.com/about/how-praxis-works"
 	urlDocs       = "https://docs.praxis.causq.com/"
 	urlTerms      = "https://praxis.net/tos"
 	urlPrivacy    = "https://praxis.net/privacy"

@@ -65,7 +65,7 @@ own GitHub release.
 
 CI (`.github/workflows/windows.yml`) does all of this when a `windows-` tag is
 pushed: it builds `Praxis.exe`, signs it with the DigiCert certificate
-(jsign), builds and signs `pangolin-amd64-<version>.msi`, makes and signs the
+(jsign), builds and signs `praxis-amd64-<version>.msi`, makes and signs the
 update manifest, and attaches both to a draft GitHub release. Push a tag named
 `windows-` and the version (e.g. `windows-1.0.3` or `windows-1.0.3-rc.1`).
 Nothing in the repo holds the version: CI strips the prefix, stamps the rest
@@ -96,7 +96,7 @@ To preview the UI in a desktop browser without Windows, run `npm run mock` in `u
 scripts\build-msi.bat 1.0.3
 ```
 
-This creates `build\pangolin-amd64-1.0.3.msi`.
+This creates `build\praxis-amd64-1.0.3.msi`.
 
 ### 3. Generate Manifest
 

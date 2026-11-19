@@ -72,13 +72,13 @@ return {
       ...tunnel,
       hdr("Account"),
       row({
-        id: "accounts", kind: "submenu", label: "milo@pangolin.net",
-        items: [hdr("Available Accounts", true), check("account:1", "milo@pangolin.net", true), check("account:2", "ops@example.com"), sep, it("account.add", "Add Account…"), it("account.logout", "Log Out")],
+        id: "accounts", kind: "submenu", label: "milo@praxis.net",
+        items: [hdr("Available Accounts", true), check("account:1", "milo@praxis.net", true), check("account:2", "ops@example.com"), sep, it("account.add", "Add Account…"), it("account.logout", "Log Out")],
       }),
       hdr("Organization"),
       row({
-        id: "orgs", kind: "submenu", label: "Fossorial",
-        items: [hdr("2 Organizations", true), check("org:a", "Fossorial", true), check("org:b", "Home Lab")],
+        id: "orgs", kind: "submenu", label: "CausQ",
+        items: [hdr("2 Organizations", true), check("org:a", "CausQ", true), check("org:b", "Home Lab")],
       }),
       hdr("Exit Node"),
       row({
@@ -90,7 +90,7 @@ return {
     it("preferences", "Preferences…"),
     row({
       id: "more", kind: "submenu", label: "More",
-      items: [hdr("Support"), it("more.howItWorks", "How Praxis Works"), it("more.docs", "Documentation"), sep, hdr("© 2026 Fossorial, Inc."), it("more.terms", "Terms of Service"), it("more.privacy", "Privacy Policy"), sep, hdr("Version 0.9.0"), it("more.checkUpdates", "Check for Updates…"), it("more.installCLI", "Install Praxis CLI…")],
+      items: [hdr("Support"), it("more.howItWorks", "How Praxis Works"), it("more.docs", "Documentation"), sep, hdr("© 2026 CausQ, Inc."), it("more.terms", "Terms of Service"), it("more.privacy", "Privacy Policy"), sep, hdr("Version 0.9.0"), it("more.checkUpdates", "Check for Updates…"), it("more.installCLI", "Install Praxis CLI…")],
     }),
     sep,
     it("quit", "Quit Praxis"),
@@ -128,11 +128,11 @@ const settings: Settings = {
     ? "Praxis was installed from the AUR. Update the praxis-client-bin package with your AUR helper, for example: yay -Syu praxis-client-bin"
     : "",
   disabled: params.has("disabled"),
-  orgName: "Fossorial", orgMode: params.has("orgMode"), managed: params.has("managed") ? ["dnsTunnel", "mtu"] : [],
+  orgName: "CausQ", orgMode: params.has("orgMode"), managed: params.has("managed") ? ["dnsTunnel", "mtu"] : [],
 };
 
 const status: StatusView = {
-  stateText: "Connected", color: "green", version: "1.9.0", agent: "Praxis Windows", orgId: "fossorial", gateway: "Active",
+  stateText: "Connected", color: "green", version: "1.9.0", agent: "Praxis Windows", orgId: "causq", gateway: "Active",
   sites: [
     { id: -1, name: "Praxis Server", endpoint: "203.0.113.10:51820", status: "Connected", color: "green", connection: "", lastSeen: new Date(Date.now() - 4000).toISOString(), gateway: false },
     { id: 3, name: "Home Lab", endpoint: "198.51.100.7:51820", status: "Connected", color: "green", connection: "Direct", lastSeen: new Date(Date.now() - 90000).toISOString(), gateway: true },
@@ -155,15 +155,15 @@ const logs: LogsSnapshot = {
 const accounts: AccountsView = {
   busyUserId: "", tunnelStarting: false,
   accounts: params.get("accounts") === "none" ? [] : [
-    { userId: "1", displayName: "milo@pangolin.net", host: "app.praxis.causq.com", hostname: "https://app.praxis.causq.com", subtitle: "app.praxis.causq.com · Fossorial", active: true, locked: false },
-    { userId: "2", displayName: "ops@example.com", host: "pangolin.example.com", hostname: "https://praxis.example.com", subtitle: "pangolin.example.com", active: false, locked: false },
-    { userId: "3", displayName: "lab@home.arpa", host: "pangolin.home.arpa", hostname: "https://praxis.home.arpa", subtitle: "pangolin.home.arpa · Login required", active: false, locked: true },
+    { userId: "1", displayName: "milo@praxis.net", host: "app.praxis.causq.com", hostname: "https://app.praxis.causq.com", subtitle: "app.praxis.causq.com · CausQ", active: true, locked: false },
+    { userId: "2", displayName: "ops@example.com", host: "praxis.example.com", hostname: "https://praxis.example.com", subtitle: "praxis.example.com", active: false, locked: false },
+    { userId: "3", displayName: "lab@home.arpa", host: "praxis.home.arpa", hostname: "https://praxis.home.arpa", subtitle: "praxis.home.arpa · Login required", active: false, locked: true },
   ],
 };
 
 // Login sheet: `?step=` previews a step; otherwise Continue walks through them.
 const loginView = (step: string, extra: Partial<LoginView> = {}): LoginView => ({
-  session: 1, step, host: "app.praxis.causq.com", code: "ABCD-EFGH", email: "milo@pangolin.net", error: "",
+  session: 1, step, host: "app.praxis.causq.com", code: "ABCD-EFGH", email: "milo@praxis.net", error: "",
   renewing: false, fixedHost: false, selfHosted: false, serverUrl: "", ...extra,
 });
 function mockLoginStart(hostname: string) {
