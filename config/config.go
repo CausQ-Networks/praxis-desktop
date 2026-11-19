@@ -14,7 +14,7 @@ import (
 
 const (
 	AppName                             = "Praxis"
-	DefaultHostname                     = "https://app.praxis.causq.com"
+	DefaultHostname                     = "https://app-praxis.causq.com"
 	ConfigFileName                      = "praxis.json"
 	LogLevel                            = "info"
 	DefaultDNSOverride                  = true
