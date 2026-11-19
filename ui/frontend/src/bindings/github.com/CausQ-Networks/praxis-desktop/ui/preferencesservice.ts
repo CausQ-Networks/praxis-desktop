@@ -15,19 +15,19 @@ import { Call as $Call, CancellablePromise as $CancellablePromise } from "@wails
 import * as $models from "./models.js";
 
 export function Opened(): $CancellablePromise<$models.PrefsOpened> {
-    return $Call.ByID(2967112610);
+    return $Call.ByID(1502045659);
 }
 
 /**
  * ResetOrg makes the current org use the global settings again.
  */
 export function ResetOrg(): $CancellablePromise<$models.Settings> {
-    return $Call.ByID(3873980668);
+    return $Call.ByID(2504132425);
 }
 
 /**
  * Update saves the form; scope says where its tunnel settings go.
  */
 export function Update(form: $models.Settings, scope: string): $CancellablePromise<$models.SettingsResult> {
-    return $Call.ByID(820936974, form, scope);
+    return $Call.ByID(2756986683, form, scope);
 }

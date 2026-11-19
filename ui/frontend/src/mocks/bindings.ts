@@ -72,8 +72,8 @@ return {
       ...tunnel,
       hdr("Account"),
       row({
-        id: "accounts", kind: "submenu", label: "milo@praxis.net",
-        items: [hdr("Available Accounts", true), check("account:1", "milo@praxis.net", true), check("account:2", "ops@example.com"), sep, it("account.add", "Add Account…"), it("account.logout", "Log Out")],
+        id: "accounts", kind: "submenu", label: "milo@causq.com",
+        items: [hdr("Available Accounts", true), check("account:1", "milo@causq.com", true), check("account:2", "ops@example.com"), sep, it("account.add", "Add Account…"), it("account.logout", "Log Out")],
       }),
       hdr("Organization"),
       row({
@@ -155,7 +155,7 @@ const logs: LogsSnapshot = {
 const accounts: AccountsView = {
   busyUserId: "", tunnelStarting: false,
   accounts: params.get("accounts") === "none" ? [] : [
-    { userId: "1", displayName: "milo@praxis.net", host: "app.praxis.causq.com", hostname: "https://app.praxis.causq.com", subtitle: "app.praxis.causq.com · CausQ", active: true, locked: false },
+    { userId: "1", displayName: "milo@causq.com", host: "app.praxis.causq.com", hostname: "https://app.praxis.causq.com", subtitle: "app.praxis.causq.com · CausQ", active: true, locked: false },
     { userId: "2", displayName: "ops@example.com", host: "praxis.example.com", hostname: "https://praxis.example.com", subtitle: "praxis.example.com", active: false, locked: false },
     { userId: "3", displayName: "lab@home.arpa", host: "praxis.home.arpa", hostname: "https://praxis.home.arpa", subtitle: "praxis.home.arpa · Login required", active: false, locked: true },
   ],
@@ -163,7 +163,7 @@ const accounts: AccountsView = {
 
 // Login sheet: `?step=` previews a step; otherwise Continue walks through them.
 const loginView = (step: string, extra: Partial<LoginView> = {}): LoginView => ({
-  session: 1, step, host: "app.praxis.causq.com", code: "ABCD-EFGH", email: "milo@praxis.net", error: "",
+  session: 1, step, host: "app.praxis.causq.com", code: "ABCD-EFGH", email: "milo@causq.com", error: "",
   renewing: false, fixedHost: false, selfHosted: false, serverUrl: "", ...extra,
 });
 function mockLoginStart(hostname: string) {

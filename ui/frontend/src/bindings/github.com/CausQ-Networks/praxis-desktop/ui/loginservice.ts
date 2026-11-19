@@ -15,18 +15,18 @@ import { Call as $Call, CancellablePromise as $CancellablePromise } from "@wails
 import * as $models from "./models.js";
 
 export function Back(): $CancellablePromise<void> {
-    return $Call.ByID(452115055);
+    return $Call.ByID(1504889278);
 }
 
 /**
  * Close ends the sheet's session, cancelling a login that hasn't finished.
  */
 export function Close(session: number): $CancellablePromise<void> {
-    return $Call.ByID(641808600, session);
+    return $Call.ByID(2325701951, session);
 }
 
 export function CopyCode(): $CancellablePromise<void> {
-    return $Call.ByID(2842061696);
+    return $Call.ByID(3947421021);
 }
 
 /**
@@ -34,17 +34,17 @@ export function CopyCode(): $CancellablePromise<void> {
  * of an account to log in to again, or "" to add an account.
  */
 export function Open(renewHostname: string): $CancellablePromise<$models.LoginView> {
-    return $Call.ByID(2960959556, renewHostname);
+    return $Call.ByID(2320204029, renewHostname);
 }
 
 export function OpenBrowser(): $CancellablePromise<void> {
-    return $Call.ByID(977800236);
+    return $Call.ByID(1779934023);
 }
 
 export function Start(hostname: string): $CancellablePromise<void> {
-    return $Call.ByID(227320968, hostname);
+    return $Call.ByID(55389059, hostname);
 }
 
 export function State(): $CancellablePromise<$models.LoginView> {
-    return $Call.ByID(4068998361);
+    return $Call.ByID(373178082);
 }
